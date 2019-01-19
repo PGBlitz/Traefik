@@ -9,8 +9,6 @@
 - hosts: localhost
   gather_facts: false
   tasks:
-    - name: Logging Ansible Role Information
-      shell: "echo 'INFO - Ansible Role - Alias Started' > /var/plexguide/pg.log && bash /opt/plexguide/menu/log/log.sh"
 
     - name: Install Status Move
       template:
