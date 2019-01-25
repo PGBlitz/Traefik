@@ -65,7 +65,7 @@ echo $typed > $file
 deployed=$(docker ps --format '{{.Names}}' | grep traefik)
 
 if [ "$deployed" == "traefik" ]; then
-  deployed="TREAFIK Deployed"; else
+  deployed="TRAEFIK Deployed"; else
   deployed="TRAEFIK NOT Deployed"; fi
 
 # Menu Interface
@@ -170,7 +170,7 @@ sleep 5
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
   exit
 else
-bash /opt/plexguide/menu/treafik/traefik.sh
+bash /opt/plexguide/menu/traefik/traefik.sh
 fi
 
 bash /opt/traefik/traefik.sh
