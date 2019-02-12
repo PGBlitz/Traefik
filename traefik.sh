@@ -6,7 +6,6 @@
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/traefik/functions.sh
-source /opt/traefik/ui.sh
 
 traefikstart() {
 
