@@ -8,6 +8,9 @@
 source /opt/traefik/functions.sh
 
 traefikstart() {
+
+mkdir -p /var/plexguide/traefik
+
 ## Check for Traefik Running
 deployed=$(docker ps --format '{{.Names}}' | grep traefik)
 
