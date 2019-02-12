@@ -13,11 +13,10 @@ main() {
 
 layoutbuilder() {
 
-  pnum=5
+  pnum=4
   mkdir -p /var/plexguide/prolist
   rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
-  echo "" > /var/plexguide/prolist/final.sh
   ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
 
   while read p; do
@@ -26,6 +25,7 @@ layoutbuilder() {
     echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
   done </var/plexguide/prolist/prolist.sh
   prolist=$(cat /var/plexguide/prolist/final.sh)
+  echo $prolist
 
   #typed2=999999999
   #while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
