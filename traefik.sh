@@ -170,7 +170,7 @@ sleep 5
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
   exit
 else
-bash /opt/plexguide/menu/traefik/traefik.sh
+  bash /opt/traefik/traefik.sh
 fi
 
 bash /opt/traefik/traefik.sh
