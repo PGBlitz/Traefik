@@ -26,6 +26,7 @@ layoutbuilder() {
   done </var/plexguide/prolist/prolist.sh
 
   cat /var/plexguide/prolist/final.sh
+  echo 
   #typed2=999999999
   #while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
   #  infolist
