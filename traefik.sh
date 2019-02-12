@@ -15,8 +15,8 @@ mkdir -p /var/plexguide/traefik
 deployed=$(docker ps --format '{{.Names}}' | grep traefik)
 
 if [ "$deployed" == "traefik" ]; then
-  deployed="TRAEFIK Deployed"; else
-  deployed="TRAEFIK NOT Deployed"; fi
+  deployed="DEPLOYED"; else
+  deployed="NOT DEPLOYED"; fi
 
 # Menu Interface
 tee <<-EOF
