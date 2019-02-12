@@ -4,19 +4,17 @@
 # Author(s):  Admin9705
 # URL:        https://plexguide.com - http://github.plexguide.com
 # GNU:        General Public License v3.0
-#################################################################################
+################################################################################
 ---
 - hosts: localhost
   gather_facts: true
   tasks:
-    - name: Part 1
-      shell: "cat /var/plexguide/NAMECHEAP_API_USER"
-      register: part1
 
-    - name: Part 2
-      shell: "cat /var/plexguide/NAMECHEAP_API_KEY"
-      register: part2
+    # PULLS PROVIDER INFO ######################################################
+    - name: 'Including cron job'
+      include_tasks: '/opt/traefik/provider.yml'
 
+    # MAIN #####################################################################
     - name: Deploy Traefik
       docker_container:
         name: traefik
