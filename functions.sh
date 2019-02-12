@@ -35,7 +35,6 @@ layoutbuilder() {
   #  read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
   #  if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then projectinterface; fi
   #done
-
 }
 
 providerinterface() {
