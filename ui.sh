@@ -25,3 +25,11 @@ EOF
 ### Builds Layout
 layoutbuilder #functions
 }
+
+uiprovider() {
+tee <<-EOF
+
+🚀 Traefik - Select a Provider
+
+
+}
