@@ -39,7 +39,9 @@ providerinterface() {
 
 tee <<-EOF
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Traefik - Select a Provider
+
 EOF
   pnum=0
   mkdir -p /var/plexguide/prolist
@@ -57,7 +59,7 @@ EOF
   echo
   typed2=999999999
   while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
-    infolist
+    #infolist
     read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
   done
