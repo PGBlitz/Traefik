@@ -30,6 +30,6 @@ uiprovider() {
 tee <<-EOF
 
 🚀 Traefik - Select a Provider
-
-
+EOF
+providerinterface
 }
