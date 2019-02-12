@@ -10,3 +10,12 @@ main() {
    [[ -e $file ]] || printf '%s\n' "$val" > "$file"
    printf -v "$var" '%s' "$(<"$file")"
 }
+
+traefikpaths() {
+  mkdir -p /var/plexguide/traefik
+}
+
+traefikstatus() {
+  if [ "$(docker ps --format '{{.Names}}' | grep traefik)" == "traefik" ]; then
+    deployed="DEPLOYED"; else deployed="NOT DEPLOYED"; fi
+}

@@ -9,14 +9,9 @@ source /opt/traefik/functions.sh
 
 traefikstart() {
 
-mkdir -p /var/plexguide/traefik
+traefikpaths
+traefikstatus
 
-## Check for Traefik Running
-deployed=$(docker ps --format '{{.Names}}' | grep traefik)
-
-if [ "$deployed" == "traefik" ]; then
-  deployed="DEPLOYED"; else
-  deployed="NOT DEPLOYED"; fi
 
 # Menu Interface
 tee <<-EOF
