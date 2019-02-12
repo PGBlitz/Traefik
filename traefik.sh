@@ -16,7 +16,6 @@ traefikstatus #functions
 ### Start UI
 uistart1 # ui
 tee <<-EOF
-
 [A] Deploy Traefik      : [$deployed]
 [Z] Exit
 

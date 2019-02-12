@@ -21,4 +21,7 @@ tee <<-EOF
 [3] Domain Name         : [$domain]
 [4] EMail Address       : [$email]
 EOF
+
+### Builds Layout
+layoutbuilder #functions
 }
