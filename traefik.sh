@@ -29,6 +29,7 @@ case $typed in
     1 )
       traefikstart ;;
     2 )
+      uiprovider
       traefikstart ;;
     3 )
 
