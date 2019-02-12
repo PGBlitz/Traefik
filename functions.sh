@@ -36,10 +36,11 @@ layoutbuilder() {
 }
 
 providerinterface() {
-  tee <<-EOF
 
-  🚀 Traefik - Select a Provider
-  EOF
+tee <<-EOF
+
+🚀 Traefik - Select a Provider
+EOF
   pnum=0
   mkdir -p /var/plexguide/prolist
   rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
