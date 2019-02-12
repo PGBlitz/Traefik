@@ -29,8 +29,12 @@ tee <<-EOF
 [2] Domain Provider     : [$provider]
 [3] Domain Name         : [$domain]
 [4] EMail Address       : [$email]
-[5] Deploy Traefik      : [$deployed]
-[6] Exit
+EOF
+echo $layout
+tee <<-EOF
+
+[A] Deploy Traefik      : [$deployed]
+[Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
