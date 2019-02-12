@@ -6,26 +6,15 @@
 # GNU:        General Public License v3.0
 ################################################################################
 source /opt/traefik/functions.sh
+source /opt/traefik/ui.sh
 
 traefikstart() {
 
-traefikpaths
-traefikstatus
+traefikpaths #functions
+traefikstatus #functions
 
-
-# Menu Interface
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Traefik - Reverse Proxy Interface Menu
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[1] Top Level Domain App: [$tld]
-[2] Domain Provider     : [$provider]
-[3] Domain Name         : [$domain]
-[4] EMail Address       : [$email]
-EOF
-echo $layout
+### Start UI
+uistart1 # ui
 tee <<-EOF
 
 [A] Deploy Traefik      : [$deployed]
