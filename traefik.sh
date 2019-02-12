@@ -55,4 +55,4 @@ main /var/plexguide/server.domain NOT-SET domain
 main /var/plexguide/tld.program NOT-SET tld
 main /var/plexguide/traefik.deploy 'Not Deployed' deploy
 
-traefikmain
+traefikstart
