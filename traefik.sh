@@ -1,18 +1,10 @@
-#!/usr/bin/env python3
+#!/bin/bash
 #
-# GitHub:   https://github.com/Admin9705/PlexGuide.com-The-Awesome-Plex-Server
-# Author:   Admin9705
-# URL:      https://plexguide.com
-#
-# PlexGuide Copyright (C) 2018 PlexGuide.com
-# Licensed under GNU General Public License v3.0 GPL-3 (in short)
-#
-#   You may copy, distribute and modify the software as long as you track
-#   changes/dates in source files. Any modifications to our software
-#   including (via compiler) GPL-licensed code must also be made available
-#   under the GPL along with build & install instructions.
-#
-#################################################################################
+# Title:      PlexGuide (Reference Title File)
+# Author(s):  Admin9705
+# URL:        https://plexguide.com - http://github.plexguide.com
+# GNU:        General Public License v3.0
+################################################################################
 
 # Create Variables (If New) & Recall
 main() {
@@ -20,12 +12,6 @@ main() {
    [[ -e $file ]] || printf '%s\n' "$val" > "$file"
    printf -v "$var" '%s' "$(<"$file")"
 }
-
-main /var/plexguide/traefik.provider NOT-SET provider
-main /var/plexguide/server.email NOT-SET email
-main /var/plexguide/server.domain NOT-SET domain
-main /var/plexguide/tld.program NOT-SET tld
-main /var/plexguide/traefik.deploy 'Not Deployed' deploy
 
 # Questions
 main2() {
@@ -75,18 +61,62 @@ tee <<-EOF
 🚀 Traefik - Reverse Proxy Interface Menu
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-1 - Top Level Domain App: [$tld]
-2 - Domain Provider     : [$provider]
-3 - Domain Name         : [$domain]
-4 - EMail Address       : [$email]
-5 - Deploy Traefik      : [$deployed]
-Z - Exit
+[1] Top Level Domain App: [$tld]
+[2] Domain Provider     : [$provider]
+[3] Domain Name         : [$domain]
+[4] EMail Address       : [$email]
+[5] Deploy Traefik      : [$deployed]
+[6] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
 # Standby
 read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
+
+case $typed in
+    1 )
+      bash /opt/plexguide/menu/pgcloner/traefik.sh
+      bash /opt/traefik/traefik.sh
+      primestart ;;
+    2 )
+      bash /opt/plexguide/menu/pgshield/pgshield.sh
+      primestart ;;
+    3 )
+      bash /opt/plexguide/menu/pgcloner/pgclone.sh
+      bash /opt/pgclone/gdrive.sh
+      primestart ;;
+    4 )
+      bash /opt/plexguide/menu/pgbox/pgboxselect.sh
+      primestart ;;
+    5 )
+      bash /opt/plexguide/menu/pgcloner/pgpress.sh
+      bash /opt/pgpress/pressmain.sh
+      primestart ;;
+    6 )
+      bash /opt/plexguide/menu/pgcloner/pgvault.sh
+      bash /opt/pgvault/pgvault.sh
+      primestart ;;
+    7 )
+      bash /opt/plexguide/menu/interface/cloudselect.sh
+      primestart ;;
+    8 )
+      bash /opt/plexguide/menu/tools/tools.sh
+      primestart ;;
+    9 )
+      bash /opt/plexguide/menu/settings/settings.sh
+      primestart ;;
+    z )
+      bash /opt/plexguide/menu/ending/ending.sh
+      exit ;;
+    Z )
+      bash /opt/plexguide/menu/ending/ending.sh
+      exit ;;
+    * )
+      primestart ;;
+esac
+
+
 
   if [ "$typed" == "1" ]; then
   bash /opt/traefik/tld.sh
@@ -175,3 +205,12 @@ fi
 
 bash /opt/traefik/traefik.sh
 exit
+
+
+main /var/plexguide/traefik.provider NOT-SET provider
+main /var/plexguide/server.email NOT-SET email
+main /var/plexguide/server.domain NOT-SET domain
+main /var/plexguide/tld.program NOT-SET tld
+main /var/plexguide/traefik.deploy 'Not Deployed' deploy
+
+traefikmain
