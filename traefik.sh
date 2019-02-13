@@ -9,6 +9,10 @@ source /opt/traefik/functions.sh
 
 traefikstart() {
 
+# Remove Deploy Block Deploy When Startups - Regenerates if Conditions Not Met
+file="/var/plexguide/traefik/block.deploy"
+if [ -e "$file" ]; then rm -rf /var/plexguide/traefik/block.deploy ; fi
+
 traefikpaths #functions
 traefikstatus #functions
 layoutbuilder # functions - builds out menu
@@ -27,6 +31,22 @@ case $typed in
     5 )
 
       traefikstart ;;
+    a )
+      file="/var/plexguide/traefik/block.deploy"
+      if [ -e "$file" ]; then
+tee <<-EOF
+
+Blocking Deployment! Something is still [NOT-SET]
+EOF
+        read -p 'Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
+      fi
+      treafikstart ;;
+      fi
+
+    A )
+
+    ;;
+
     z )
       exit ;;
     Z )
