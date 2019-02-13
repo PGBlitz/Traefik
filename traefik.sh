@@ -33,7 +33,7 @@ case $typed in
       traefikstart ;;
     a )
       file="/var/plexguide/traefik/block.deploy"
-      if [ -e "$file" ]; then read -p 'Blocking! Must Configure Everything! | Press [ENTER]' typed < /dev/tty; fi
+      if [ -e "$file" ]; then echo; read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty; fi
       traefikstart ;;
     A )
         ;;
