@@ -70,15 +70,14 @@ tee <<-EOF
 
 💬 Quitting? TYPE > exit
 EOF
-  read -p '🌍 Input Value | Press [ENTER]: ' typed < /dev/tty
+  read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
 
 provider7=$(cat /var/plexguide/traefik.provider)
 mkdir -p "/var/plexguide/traefik/$provider7"
 echo "$typed" > "/var/plexguide/traefik/$provider7/$process5"
-echo 
-echo "$process5 - Input Complete!"
-read -p '🌍 Acknowledge Input | Press [ENTER] ' typed < /dev/tty
+echo
+read -p 'Input Complete! | Press [ENTER] ' typed < /dev/tty
 
 }
 
