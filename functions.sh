@@ -76,7 +76,7 @@ EOF
 provider7=$(cat /var/plexguide/traefik.provider)
 mkdir -p "/var/plexguide/traefik/$provider7"
 echo "$typed" > "/var/plexguide/traefik/$provider7/$process5"
-
+echo 
 echo "$process5 - Input Complete!"
 read -p '🌍 Acknowledge Input | Press [ENTER] ' typed < /dev/tty
 
