@@ -41,11 +41,8 @@ EOF
         read -p 'Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
       fi
       treafikstart ;;
-      fi
-
     A )
-
-    ;;
+        ;;
 
     z )
       exit ;;
