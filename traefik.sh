@@ -22,7 +22,8 @@ case $typed in
       traefikstart ;;
     2 )
       providerinterface
-      traefikstart ;;
+      bash /opt/traefik/traefik.sh
+      exit ;;
     3 )
 
       traefikstart ;;
