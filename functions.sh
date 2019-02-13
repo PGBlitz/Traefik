@@ -131,6 +131,7 @@ EOF
   done
   echo "FLAG4"
   echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5-) > /var/plexguide/traefik.provider
+  traefikstart
 }
 
 traefikpaths() {
