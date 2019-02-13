@@ -47,7 +47,7 @@ EOF
     file="/var/plexguide/traefik/$provider7/$p"
       if [ ! -e "$file" ]; then filler="[NOT SET] - "; else filler=""; fi
 
-    echo "$filler[$pnum] $p"
+    echo "[$pnum] ${filler}${p}"
   done </var/plexguide/prolist/prolist.sh
 
 # Last Piece of the Interface
