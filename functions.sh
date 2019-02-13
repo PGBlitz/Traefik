@@ -60,7 +60,7 @@ EOF
 }
 
 layoutprompt() {
-  process5=$(cat /var/plexguide/prolist/final.sh | grep "$typed" cut -c 5-)
+  process5=$(cat /var/plexguide/prolist/final.sh | grep "$typed" | cut -c 5-)
 
 tee <<-EOF
 
