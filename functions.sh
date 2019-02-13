@@ -77,7 +77,8 @@ provider7=$(cat /var/plexguide/traefik.provider)
 mkdir -p "/var/plexguide/traefik/$provider7"
 echo "$typed" > "/var/plexguide/traefik/$provider7/$process5"
 echo
-read -p 'Input Complete! | Press [ENTER] ' typed < /dev/tty
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+read -p 'Information Stored | Press [ENTER] ' typed < /dev/tty
 
 }
 
