@@ -45,7 +45,7 @@ EOF
 
     # Generates a Not-Set for the Echo Below
     file="/var/plexguide/traefik/$provider7/$p"
-      if [ ! -e "$file" ]; then filler="[NOT SET] - "; else filler=""; fi
+      if [ ! -e "$file" ]; then filler="** NOT SET - "; else filler=""; fi
 
     echo "[$pnum] ${filler}${p}"
   done </var/plexguide/prolist/prolist.sh
