@@ -11,29 +11,7 @@ traefikstart() {
 
 traefikpaths #functions
 traefikstatus #functions
-
-if [[ "$provider" == "NOT-SET" ]]; then layout=" "; fi
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Traefik - Reverse Proxy Interface Menu
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[1] Top Level Domain App: [$tld]
-[2] Domain Provider     : [$provider]
-[3] Domain Name         : [$domain]
-[4] EMail Address       : [$email]
-EOF
-layoutbuilder
-tee <<-EOF
-[A] Deploy Traefik      : [$deployed]
-[Z] Exit
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-EOF
-
-# Standby
-read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
+layoutbuilder # functions - builds out menu
 
 case $typed in
     1 )
