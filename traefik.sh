@@ -33,13 +33,7 @@ case $typed in
       traefikstart ;;
     a )
       file="/var/plexguide/traefik/block.deploy"
-      if [ -e "$file" ]; then
-tee <<-EOF
-
-Blocking Deployment! Something is still [NOT-SET]
-EOF
-        read -p 'Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
-      fi
+      if [ -e "$file" ]; then read -p 'Blocking! Must Configure Everything! | Press [ENTER]' typed < /dev/tty; fi
       treafikstart ;;
     A )
         ;;
