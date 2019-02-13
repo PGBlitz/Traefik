@@ -42,7 +42,12 @@ EOF
     let "pnum++"
     echo "$p" > "/var/plexguide/prolist/$pnum"
     echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
-    echo "[$pnum] $p"
+
+    # Generates a Not-Set for the Echo Below
+    file="/var/plexguide/traefik/$provider7/$p"
+      if [ ! -e "$file" ]; then filler="[NOT SET] - "; else filler=""; fi
+
+    echo "$filler[$pnum] $p"
   done </var/plexguide/prolist/prolist.sh
 
 # Last Piece of the Interface
