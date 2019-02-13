@@ -74,6 +74,7 @@ EOF
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
 
 provider7=$(cat /var/plexguide/traefik.provider)
+mkdir -p "/var/plexguide/traefik/$provider7"
 echo "$typed" > "/var/plexguide/traefik/$provider7/$process5"
 
 echo "$process5 - Input Complete!"
