@@ -118,18 +118,14 @@ EOF
     echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
   done </var/plexguide/prolist/prolist.sh
 
-  echo "FLAG1"
   cat /var/plexguide/prolist/final.sh
   echo
   typed2=999999999
-  echo "FLAG2"
   while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
     read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
-    echo "FLAG3"
     echo
   done
-  echo "FLAG4"
   echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5-) > /var/plexguide/traefik.provider
   traefikstart
 }
