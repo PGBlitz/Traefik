@@ -11,6 +11,11 @@ main() {
    printf -v "$var" '%s' "$(<"$file")"
 }
 
+blockdeploycheck() {
+  file="/var/plexguide/traefik/block.deploy"
+  if [ -e "$file" ]; then echo; read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty; fi
+}
+
 layoutbuilder() {
 
   if [[ "$provider" == "NOT-SET" ]]; then layout=" "; fi
@@ -47,7 +52,7 @@ EOF
     file="/var/plexguide/traefik/$provider7/$p"
       if [ ! -e "$file" ]; then
         filler="** NOT SET - "
-        touch /var/plexguide/traefik/block.deploy 
+        touch /var/plexguide/traefik/block.deploy
       else filler=""; fi
 
     echo "[$pnum] ${filler}${p}"
