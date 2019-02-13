@@ -34,13 +34,16 @@ EOF
 
   ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
 
+  # Set Provider for the Process
+  provider7=$(cat /var/plexguide/traefik.provider)
+  mkdir -p "/var/plexguide/traefik/$provider7"
+
   while read p; do
     let "pnum++"
     echo "$p" > "/var/plexguide/prolist/$pnum"
     echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+    echo "[$pnum] $p"
   done </var/plexguide/prolist/prolist.sh
-
-  cat /var/plexguide/prolist/final.sh
 
 # Last Piece of the Interface
 tee <<-EOF
@@ -73,8 +76,6 @@ EOF
   read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
 
-provider7=$(cat /var/plexguide/traefik.provider)
-mkdir -p "/var/plexguide/traefik/$provider7"
 echo "$typed" > "/var/plexguide/traefik/$provider7/$process5"
 echo
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
