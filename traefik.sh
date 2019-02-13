@@ -32,7 +32,7 @@ case $typed in
     Z )
       exit ;;
     * )
-      primestart ;;
+      traefikstart ;;
 esac
 
 }
