@@ -76,8 +76,8 @@ ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var
 
 while read p; do
   let "pnum++"
-  echo "$p"
-  cat "/opt/traefik/providers/$provider/$p"
+  echo -n "$p"
+  echo -n $(cat "/opt/traefik/providers/$provider/$p")
 done </var/plexguide/prolist/prolist.sh
 
 echo
