@@ -35,12 +35,12 @@ tee <<-EOF
 🚀 Domain Name - Current Domain: $typed
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE: Traefik must be deployed/redeployed for domain name changes to take
-affect!
+NOTE: Traefik must be deployed/redeployed for the domain name changes to
+take affect!
 
 EOF
   echo $typed > /var/plexguide/server.domain
-  read -p 'Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
+  read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
 
