@@ -54,7 +54,7 @@ echo PROGRAMS:
 echo $running
 tee <<-EOF
 
-⚠️  NOTE: App Must Be Actively Running! To quit, type >>> exit
+⚠️  NOTE: App Must Be Actively Running! To quit, Type >>>>> exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
