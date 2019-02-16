@@ -54,6 +54,45 @@ EOF
 
 }
 
+deploytraefik() {
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Deploy Traefik with the Following Values?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Domain Provider: $provider
+Domain Name    : $domain
+EMail Address  : $email
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+pnum=0
+mkdir -p /var/plexguide/prolist
+rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+
+provider=godaddy # delte this after testing
+ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
+
+while read p; do
+  let "pnum++"
+  echo "$p"
+  cat "/opt/traefik/providers/$provider/$p"
+done </var/plexguide/prolist/prolist.sh
+
+echo
+typed2=999999999
+while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
+  echo "QUITTING? Type >>> exit"
+  read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
+  if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
+  echo
+done
+echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5-) > /var/plexguide/traefik.provider
+
+
+}
+
 emailinterface() {
 
 tee <<-EOF
