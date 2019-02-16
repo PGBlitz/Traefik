@@ -16,6 +16,34 @@ blockdeploycheck() {
   if [ -e "$file" ]; then echo; read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty; fi
 }
 
+domaininterface() {
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Domain Name - Current Domain: $domain
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💬 Quitting? TYPE > exit
+EOF
+  read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
+  if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Domain Name - Current Domain: $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: Traefik must be deployed/redeployed for domain name changes to take
+affect!
+
+EOF
+  echo $typed > /var/plexguide/server.domain
+  read -p 'Acknowledge Info | Press [ENTER]: ' typed < /dev/tty
+
+}
+
 layoutbuilder() {
 
   if [[ "$provider" == "NOT-SET" ]]; then layout=" "; fi

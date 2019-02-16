@@ -25,7 +25,7 @@ case $typed in
       bash /opt/traefik/traefik.sh
       exit ;;
     3 )
-
+      domaininterface
       traefikstart ;;
     4 )
       traefikstart ;;
