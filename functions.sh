@@ -54,6 +54,56 @@ EOF
 
 }
 
+emailininterface() {
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Current EMail Address: $domain
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUITTING? Type >>> exit
+EOF
+  read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
+  if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
+  if [[ $(cat /var/plexguide/server.email | grep ".") != "" ]]; then
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 EMail Invalid - Missing "." - $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+      read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+      emailinterface
+  fi
+
+  if [[ $(cat /var/plexguide/server.email | grep "@") != "" ]]; then
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 EMail Invalid - Missing "@" - $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+      read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+      emailinterface
+  fi
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Current EMail Address: $typed
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: Make all changes first.  Traefik must be deployed/redeployed for
+the email name changes to take affect!
+
+EOF
+  echo $typed > /var/plexguide/server.email
+  read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+
+}
+
 layoutbuilder() {
 
   if [[ "$provider" == "NOT-SET" ]]; then layout=" "; fi
