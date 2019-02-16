@@ -28,7 +28,7 @@ QUITTING? Type >>> exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
-  if [[ $(cat /var/plexguide/server.domain | grep ".") == "" ]]; then
+  if [[ $(cat /var/plexguide/server.domain | grep ".") != "" ]]; then
 
 tee <<-EOF
 
