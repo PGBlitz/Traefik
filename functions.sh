@@ -66,7 +66,7 @@ QUITTING? Type >>> exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
-  if [[ $(echo $typed | grep ".") != "" ]]; then
+  if [[ $(echo $typed | grep ".") == "" ]]; then
 
 tee <<-EOF
 
@@ -78,7 +78,7 @@ EOF
       emailinterface
   fi
 
-  if [[ $(echo $typed | grep "@") != "" ]]; then
+  if [[ $(echo $typed | grep "@") == "" ]]; then
 
 tee <<-EOF
 
