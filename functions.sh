@@ -78,9 +78,9 @@ while read p; do
   let "pnum++"
   echo -n "$p"
   echo -n $(cat "/opt/traefik/providers/$provider/$p")
-  echo
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 done </var/plexguide/prolist/prolist.sh
-  echo 
+  echo
 
 echo
 typed2=999999999
