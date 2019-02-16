@@ -59,14 +59,14 @@ emailinterface() {
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Current EMail Address: $domain
+🚀 Current EMail Address: $email
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 QUITTING? Type >>> exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
-  if [[ $(cat /var/plexguide/server.email | grep ".") != "" ]]; then
+  if [[ $(echo $typed | grep ".") != "" ]]; then
 
 tee <<-EOF
 
@@ -78,7 +78,7 @@ EOF
       emailinterface
   fi
 
-  if [[ $(cat /var/plexguide/server.email | grep "@") != "" ]]; then
+  if [[ $(echo $typed | grep "@") != "" ]]; then
 
 tee <<-EOF
 
