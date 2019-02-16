@@ -54,7 +54,7 @@ EOF
 
 }
 
-emailininterface() {
+emailinterface() {
 
 tee <<-EOF
 
