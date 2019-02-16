@@ -36,11 +36,13 @@ case $typed in
 
       traefikstart ;;
     a )
-      blockdeploycheck
-      traefikstart ;;
+      deploytraefik
+      bash /opt/traefik/traefik.sh
+      exit ;;
     A )
-      blockdeploycheck
-      traefikstart ;;
+      deploytraefik
+      bash /opt/traefik/traefik.sh
+      exit ;;
     z )
       exit ;;
     Z )
