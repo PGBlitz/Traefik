@@ -66,6 +66,8 @@ QUITTING? Type >>> exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
+
+### fix bug if user doesn't type .
   if [[ $(echo $typed | grep ".") == "" ]]; then
 
 tee <<-EOF
