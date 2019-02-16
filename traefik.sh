@@ -29,7 +29,9 @@ case $typed in
       bash /opt/traefik/traefik.sh
       exit ;;
     4 )
-      traefikstart ;;
+      emailinterface
+      bash /opt/traefik/traefik.sh
+      exit ;;
     5 )
 
       traefikstart ;;
