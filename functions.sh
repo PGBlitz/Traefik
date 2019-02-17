@@ -135,27 +135,6 @@ while true; do
   echo
 done
 
-tempseconds=$(cat /var/plexguide/server.delaycheck)
-delseconds=$[${tempseconds}+10]
-
-while [[ "$delseconds" -ge "0" ]]; do
-
-tee <<-EOF
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Standby for Traefik Deployment Validation
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-NOTE 1: Do NOT EXIT this interface. Please standby for valdation checks!
-
-NOTE 2: Standing by for [$delaycheck] + 10 seconds per the set DNS delay
-check! When complete, Traefik will reboot and then we will rewrite all
-your containers and then check to see if Traefik Deployed!
-
-EOF
-  sleep 1
-  delseconds=$[${delseconds}-1]
-done
 }
 
 emailinterface() {
@@ -292,6 +271,29 @@ read -p 'Information Stored | Press [ENTER] ' typed < /dev/tty
 
 }
 
+postdeploy() {
+  tempseconds=$(cat /var/plexguide/server.delaycheck)
+  delseconds=$[${tempseconds}+10]
+
+  while [[ "$delseconds" -ge "0" ]]; do
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Standby for Traefik Deployment Validation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE 1: Do NOT EXIT this interface. Please standby for valdation checks!
+
+NOTE 2: Standing by for [$delseconds] + 10 seconds per the set DNS delay
+check! When complete, Traefik will reboot and then we will rewrite all
+your containers and then check to see if Traefik Deployed!
+
+EOF
+    sleep 1
+    delseconds=$[${delseconds}-1]
+  done
+}
 
 providerinterface() {
 
