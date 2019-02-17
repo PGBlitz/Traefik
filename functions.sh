@@ -364,6 +364,7 @@ done </var/plexguide/prolist/prolist.sh
 
 ansible-playbook /opt/traefik/traefik.yml
 
+postdeploy
 }
 
 traefikpaths() {
