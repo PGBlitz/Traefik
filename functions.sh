@@ -270,8 +270,7 @@ echo "
     env:
       PUID: 1000
       PGID: 1000
-      PROVIDER: $provider
-" | tee /opt/traefik/provider.yml
+      PROVIDER: $provider" | tee /opt/traefik/provider.yml
 
 mkdir -p /var/plexguide/prolist
 rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
@@ -282,6 +281,7 @@ while read p; do
   let "pnum++"
   echo -n "      ${p}: " >> /opt/traefik/provider.yml
   echo -n $(cat "/var/plexguide/traefik/$provider/$p") >> /opt/traefik/provider.yml
+  echo 
 done </var/plexguide/prolist/prolist.sh
 
 echo "DONE DONE"
