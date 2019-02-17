@@ -85,17 +85,12 @@ done </var/plexguide/prolist/prolist.sh
 echo
 
 typed2=999999999
-while [[ "$typed2" != "y" || "$typed2" != "Y" || "$typed2" != "Yes" || "$typed2" != "YES" ]]; do
+while [[ "$typed2" != "86987686767867689676976975464" ]]; do
   echo "Deploy Traefik?"
   read -p 'y or n? | Press [ENTER]: ' typed2 < /dev/tty
   if [[ "$typed2" == "n" || "$typed2" == "N" || "$typed2" == "No" || "$typed2" == "NO" ]]; then traefikstart; fi
-  echo
+  if [[ "$typed2" == "y" || "$typed2" == "Y" || "$typed2" == "Yes" || "$typed2" == "YES" ]]; then traefikbuilder; fi
 done
-
-# Build the YML
-
-echo "DONE"
-
 
 }
 
@@ -264,6 +259,11 @@ EOF
     echo
   done
   echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5-) > /var/plexguide/traefik.provider
+}
+
+traefikbuilder() {
+  echo "DONE"
+  echo ""
 }
 
 traefikpaths() {
