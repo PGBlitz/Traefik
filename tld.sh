@@ -119,7 +119,7 @@ tldtype=$(cat /var/plexguide/tld.type)
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
   if [[ "$tldtype" == "standard" ]]; then
-    ansible-playbook /opt/plexguide/containers/$old.yml
+    ansible-playbook /opt/coreapps/apps/$old.yml
   elif [[ "$tldtype" == "wordpress" ]]; then
     echo "$old" > /tmp/wp_id
     ansible-playbook /opt/pgpress/wordpress.yml
@@ -128,7 +128,7 @@ if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
 fi
 
-ansible-playbook /opt/plexguide/containers/$new.yml
+ansible-playbook /opt/coreapps/apps/$new.yml
 echo "standard" > /var/plexguide/tld.type
 
 tee <<-EOF

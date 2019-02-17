@@ -34,7 +34,7 @@ count=$(wc -l < /var/plexguide/container.running)
 
 for ((i=1; i<$count+1; i++)); do
 	app=$(sed "${i}q;d" /var/plexguide/container.running)
-	ansible-playbook /opt/plexguide/containers/$app.yml; done
+	ansible-playbook /opt/coreapps/apps/$app.yml; done
 
 echo ""
 echo 'INFO - Rebuilding Complete!' > /var/plexguide/logs/pg.log && bash /opt/plexguide/menu/log/log.sh

@@ -25,8 +25,8 @@ echo "Only the Old TLD & New TLD Containers Must Be Rebuilt!"
 read -n 1 -s -r -p "Press [Any] Key to Continue"
 echo ""
 
-if [ "old" != "" ]; then ansible-playbook /opt/plexguide/containers/$typed.yml; fi
-ansible-playbook /opt/plexguide/containers/$new.yml
+if [ "old" != "" ]; then ansible-playbook /opt/coreapps/apps/$typed.yml; fi
+ansible-playbook /opt/coreapps/apps/$new.yml
 
 echo ""
 read -n 1 -s -r -p "Containers - Rebuilt! Press [Any] Key to Continue"
