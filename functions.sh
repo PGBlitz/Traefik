@@ -283,16 +283,27 @@ tee <<-EOF
 
 NOTE 1: Do NOT EXIT this interface. Please standby for valdation checks!
 
-NOTE 2: Standing by for [$delseconds] + 10 seconds per the set DNS delay
+NOTE 2: Standing by for [$tempseconds] + 10 seconds per the set DNS delay
 check! When complete, Traefik will reboot and then we will rewrite all
 your containers and then check to see if Traefik Deployed!
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-while [[ "$delseconds" -ge "0" ]]; do
+while [[ "$delseconds" -ge "1" ]]; do
   delseconds=$[${delseconds}-1]
   echo -ne "Stand By - Traefik Validaiton Process: $delseconds Seconds"'\r';
   sleep 1; done
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Rebuilding Portainer
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EOF
+
+ansible-playbook /opt/plexguide/containers/portainer.yml
 
 }
 
