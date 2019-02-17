@@ -18,6 +18,10 @@
       shell: "cat /var/plexguide/server.email"
       register: email
 
+    - name: Register Delay Check
+      shell: "cat /var/plexguide/server.delaycheck"
+      register: delaycheck
+
     - name: Register Domain
       shell: "cat /var/plexguide/server.domain"
       register: domain

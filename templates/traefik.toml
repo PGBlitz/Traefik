@@ -34,7 +34,7 @@ storage = "/etc/traefik/acme/acme.json"
 entryPoint = "https"
   [acme.dnsChallenge]
     provider = "{{provider.stdout}}"
-    delayBeforeCheck = 30
+    delayBeforeCheck = "{{delaycheck.stdout}}"
 
 [[acme.domains]]
   main = "{{domain.stdout}}"

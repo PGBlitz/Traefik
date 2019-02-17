@@ -161,11 +161,12 @@ tee <<-EOF
 [2] Domain Provider     : [$provider]
 [3] Domain Name         : [$domain]
 [4] EMail Address       : [$email]
+[5] DNS Delay Check     : [$delaycheck] Seconds
 EOF
 
   # Generates Rest of Inbetween Interface
 
-  pnum=4
+  pnum=5
   mkdir -p /var/plexguide/prolist
   rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
