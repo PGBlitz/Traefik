@@ -43,6 +43,22 @@ done
 
 echo "$typed2" > /var/plexguide/server.delaycheck
 
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 New DNS Delay Check Value: [$typed] Seconds
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE 1: Make all changes first.  Traefik must be deployed/redeployed for
+this to take affect!
+
+NOTE 2: When deploying Traefik, you will be require to wait at least $typed 
+seconds as a result of the check.
+
+EOF
+  echo $typed > /var/plexguide/server.email
+  read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
+
 }
 
 domaininterface() {
