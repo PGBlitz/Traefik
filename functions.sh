@@ -29,19 +29,19 @@ provider validates your Traefik container! Setting it too low may result
 in the provider being unable to validate your traefik container, which may
 result in MISSING the opportunity to validate your https:// certificates!
 
-Delay the Traefik DNS Check for how many seconds?
+Delay the Traefik DNS Check for how many seconds? (Default 90)
 
 EOF
 
 typed2=999999999
-while [[ "$typed2" -lt "30" || "$typed2" -gt "90" ]]; do
+while [[ "$typed2" -lt "30" || "$typed2" -gt "120" ]]; do
   echo "QUITTING? Type >>> exit"
-  read -p 'Type Number Between 30 through 90 | Press [ENTER]: ' typed2 < /dev/tty
+  read -p 'Type Number Between 30 through 120 | Press [ENTER]: ' typed2 < /dev/tty
   if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
   echo
 done
 
-echo "$typed2" > /var/plexguide/
+echo "$typed2" > /var/plexguide/server.delaycheck
 
 }
 
