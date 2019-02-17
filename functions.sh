@@ -83,6 +83,7 @@ done </var/plexguide/prolist/prolist.sh
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 echo
+
 typed2=999999999
 while [[ "$typed2" != "y" || "$typed2" != "Y" || "$typed2" != "Yes" || || "$typed2" != "YES" ]]; do
   echo "Deploy Traefik?"
@@ -93,7 +94,7 @@ done
 
 # Build the YML
 
-echo DONE
+echo "DONE"
 
 
 }
