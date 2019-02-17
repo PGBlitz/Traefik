@@ -303,6 +303,17 @@ EOF
     echo
   done
   echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5-) > /var/plexguide/traefik.provider
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Provider Set!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: Make all changes first.  Traefik must be deployed/redeployed for
+this to take affect!
+
+EOF
+  read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 }
 
 traefikbuilder() {
