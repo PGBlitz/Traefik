@@ -275,8 +275,6 @@ postdeploy() {
   tempseconds=$(cat /var/plexguide/server.delaycheck)
   delseconds=$[${tempseconds}+10]
 
-  while [[ "$delseconds" -ge "0" ]]; do
-
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -290,9 +288,13 @@ check! When complete, Traefik will reboot and then we will rewrite all
 your containers and then check to see if Traefik Deployed!
 
 EOF
-    sleep 1
-    delseconds=$[${delseconds}-1]
-  done
+
+delstart=$delseconds
+for i in {0..$delstart}; do
+  delseconds=$[${delseconds}-1]
+  echo -ne "Seconds to Go: $i"'\r';
+  sleep 1; done
+
 }
 
 providerinterface() {
