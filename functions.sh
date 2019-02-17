@@ -91,6 +91,11 @@ while [[ "$typed2" != "y" || "$typed2" != "Y" || "$typed2" != "Yes" || || "$type
   echo
 done
 
+# Build the YML
+
+echo DONE
+
+
 }
 
 emailinterface() {
