@@ -278,13 +278,9 @@ rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
 
 while read p; do
-  let "pnum++"
   echo -n "      ${p}: " >> /opt/traefik/provider.yml
-  echo -n $(cat "/var/plexguide/traefik/$provider/$p") >> /opt/traefik/provider.yml
-  echo 
+  echo $(cat "/var/plexguide/traefik/$provider/$p") >> /opt/traefik/provider.yml
 done </var/plexguide/prolist/prolist.sh
-
-echo "DONE DONE"
 }
 
 traefikpaths() {
