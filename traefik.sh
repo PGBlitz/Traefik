@@ -56,7 +56,7 @@ esac
 
 main /var/plexguide/traefik.provider NOT-SET provider
 main /var/plexguide/server.email NOT-SET email
-main /var/plexguide/server.delaycheck 90 provider
+main /var/plexguide/server.delaycheck 90 delaycheck
 main /var/plexguide/server.domain NOT-SET domain
 main /var/plexguide/tld.program NOT-SET tld
 main /var/plexguide/traefik.deploy 'Not Deployed' deploy
