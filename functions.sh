@@ -88,7 +88,7 @@ typed2=999999999
 while [[ "$typed2" != "y" || "$typed2" != "Y" || "$typed2" != "Yes" || "$typed2" != "YES" ]]; do
   echo "Deploy Traefik?"
   read -p 'y or n? | Press [ENTER]: ' typed2 < /dev/tty
-  if [[ "$typed2" == "n" || "$typed2" == "N" || "$typed2" == "No" || || "$typed2" == "NO" ]]; then traefikstart; fi
+  if [[ "$typed2" == "n" || "$typed2" == "N" || "$typed2" == "No" || "$typed2" == "NO" ]]; then traefikstart; fi
   echo
 done
 
