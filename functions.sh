@@ -271,11 +271,7 @@ echo "
       PUID: 1000
       PGID: 1000
       PROVIDER: $provider
-"
-
-while
-
-| tee /opt/traefik/provider.yml
+" | tee /opt/traefik/provider.yml
 
 mkdir -p /var/plexguide/prolist
 rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
