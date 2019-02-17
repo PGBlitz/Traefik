@@ -267,7 +267,10 @@ traefikbuilder() {
 provider=$(cat /var/plexguide/traefik.provider)
 
 echo "
-    env:
+
+- name: 'Setting PG ENV'
+  set_fact:
+    pg_env:
       PUID: 1000
       PGID: 1000
       PROVIDER: $provider" | tee /opt/traefik/provider.yml
@@ -281,6 +284,11 @@ while read p; do
   echo -n "      ${p}: " >> /opt/traefik/provider.yml
   echo $(cat "/var/plexguide/traefik/$provider/$p") >> /opt/traefik/provider.yml
 done </var/plexguide/prolist/prolist.sh
+
+ansible-playbook /opt/traefik/traefik.yml
+
+echo "DONE DONE"
+
 }
 
 traefikpaths() {

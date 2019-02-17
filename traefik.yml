@@ -10,10 +10,60 @@
   gather_facts: true
   tasks:
 
-    # PULLS PROVIDER INFO ######################################################
+    # BASIC TASKS ######################################################
     - name: 'Including cron job'
       include_tasks: '/opt/traefik/provider.yml'
 
+    - name: Register E-Mail
+      shell: "cat /var/plexguide/server.email"
+      register: email
+
+    - name: Register Domain
+      shell: "cat /var/plexguide/server.domain"
+      register: domain
+
+    - name: Register Provider
+      shell: "cat /var/plexguide/traefik.provider"
+      register: provider
+
+    - name: Remove Traefik
+      docker_container:
+        name: traefik
+        state: absent
+
+    - name: Removing Prior Traefik.toml
+      file:
+        state: absent
+        path: /opt/appdata/traefik/traefik.toml
+
+    - name: Create Basic Directories
+      file: "path={{item}} state=directory mode=0775 owner=1000 group=1000"
+      with_items:
+        - /opt/appdata/traefik
+        - /opt/appdata/traefik/acme
+
+    - name: Installing Traefik.Toml
+      template:
+        src: traefik.toml
+        dest: /opt/appdata/traefik/traefik.toml
+        force: yes
+        owner: 1000
+        group: 1000
+
+    - name: Check acme.json exists
+      stat:
+        path: "/opt/appdata/traefik/acme/acme.json"
+      register: acme_json
+
+    - name: Installing ACME
+      template:
+        src: acme.json
+        dest: /opt/appdata/traefik/acme/acme.json
+        force: yes
+        mode: 0600
+        owner: 1000
+        group: 1000
+      when: acme_json.stat.exists == False
     # MAIN #####################################################################
     - name: Deploy Traefik
       docker_container:
@@ -23,12 +73,7 @@
         published_ports:
           - "443:443"
           - "80:80"
-        env:
-          PUID: 1000
-          PGID: 1000
-          PROVIDER: namecheap
-          NAMECHEAP_API_USER: "{{part1.stdout}}"
-          NAMECHEAP_API_KEY: "{{part2.stdout}}"
+        env: '{{pg_env}}'
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock:ro
           - /etc/localtime:/etc/localtime:ro
