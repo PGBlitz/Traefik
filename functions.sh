@@ -84,12 +84,14 @@ done </var/plexguide/prolist/prolist.sh
 
 echo
 
-typed2=999999999
-while [[ "$typed2" != "86987686767867689676976975464" ]]; do
+while true; do
   echo "Deploy Traefik?"
   read -p 'y or n? | Press [ENTER]: ' typed2 < /dev/tty
   if [[ "$typed2" == "n" || "$typed2" == "N" || "$typed2" == "No" || "$typed2" == "NO" ]]; then traefikstart; fi
-  if [[ "$typed2" == "y" || "$typed2" == "Y" || "$typed2" == "Yes" || "$typed2" == "YES" ]]; then traefikbuilder; fi
+  if [[ "$typed2" == "y" || "$typed2" == "Y" || "$typed2" == "Yes" || "$typed2" == "YES" ]]; then
+  traefikbuilder
+  traefikstart; fi
+  echo
 done
 
 }
