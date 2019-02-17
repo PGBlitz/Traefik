@@ -155,7 +155,7 @@ your containers and then check to see if Traefik Deployed!
 EOF
   sleep 1
   delseconds=$[${delseconds}-1]
-done 
+done
 }
 
 emailinterface() {
@@ -362,7 +362,6 @@ done </var/plexguide/prolist/prolist.sh
 
 ansible-playbook /opt/traefik/traefik.yml
 
-postdeploy
 }
 
 traefikpaths() {
