@@ -193,7 +193,7 @@ EOF
 
   # Generates Rest of Inbetween Interface
 
-  pnum=5
+  pnum=6
   mkdir -p /var/plexguide/prolist
   rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
