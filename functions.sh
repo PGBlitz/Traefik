@@ -193,7 +193,7 @@ EOF
 
   # Generates Rest of Inbetween Interface
 
-  pnum=6
+  pnum=5
   mkdir -p /var/plexguide/prolist
   rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
 
@@ -231,7 +231,7 @@ EOF
   read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
 
   # Prompt User To Input Information Based on Greater > 4 & Less Than pnum++
-  if [[ "$typed" -ge "5" && "$typed" -le "$pnum" ]]; then layoutprompt; fi
+  if [[ "$typed" -ge "6" && "$typed" -le "$pnum" ]]; then layoutprompt; fi
 
 }
 
