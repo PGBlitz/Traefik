@@ -29,7 +29,7 @@ provider validates your Traefik container! Setting it too low may result
 in the provider being unable to validate your traefik container, which may
 result in MISSING the opportunity to validate your https:// certificates!
 
-How many second do you wish to delay the check for?
+Delay the Traefik DNS Check for how many seconds?
 
 EOF
 
@@ -40,6 +40,8 @@ while [[ "$typed2" -lt "30" || "$typed2" -gt "90" ]]; do
   if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
   echo
 done
+
+echo "$typed2" > /var/plexguide/
 
 }
 
