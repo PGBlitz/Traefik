@@ -16,6 +16,57 @@ blockdeploycheck() {
   if [ -e "$file" ]; then echo; read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty; fi
 }
 
+delaycheckinterface() {
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Traefik - DNS Delay Check
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE: This enables a certain amount of time to be delayed before the
+provider validates your Traefik container! Setting it too low may result
+in the provider being unable to validate your traefik container, which may
+result in MISSING the opportunity to validate your https:// certificates!
+
+How many second do you wish to delay the check for?
+
+EOF
+
+typed2=999999999
+while [[ "$typed2" -lt "30" || "$typed2" -gt "90" ]]; do
+  echo "QUITTING? Type >>> exit"
+  read -p 'Type Number Between 30 through 90 | Press [ENTER]: ' typed2 < /dev/tty
+  if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
+  echo
+done
+
+}
+
+  pnum=0
+  mkdir -p /var/plexguide/prolist
+  rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+
+  ls -la "/opt/traefik/providers" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
+
+  while read p; do
+    let "pnum++"
+    echo "$p" > "/var/plexguide/prolist/$pnum"
+    echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+  done </var/plexguide/prolist/prolist.sh
+
+  cat /var/plexguide/prolist/final.sh
+  echo
+  typed2=999999999
+  while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
+    echo "QUITTING? Type >>> exit"
+    read -p 'Type Number | Press [ENTER]: ' typed2 < /dev/tty
+    if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
+    echo
+  done
+  echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5-) > /var/plexguide/traefik.provider
+}
+
 domaininterface() {
 
 tee <<-EOF

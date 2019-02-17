@@ -33,7 +33,7 @@ case $typed in
       bash /opt/traefik/traefik.sh
       exit ;;
     5 )
-      dnsdelaycheck
+      delaycheckinterface
       bash /opt/traefik/traefik.sh
       exit ;;
     a )
