@@ -289,10 +289,9 @@ your containers and then check to see if Traefik Deployed!
 
 EOF
 
-delstart=75
-for i in {0..$delstart}; do
+while [[ "$delseconds" -ge "0" ]]; do
   delseconds=$[${delseconds}-1]
-  echo -ne "Seconds to Go: $delseconds"'\r';
+  echo -ne "Stand By - Traefik Validaiton Process: $delseconds Seconds"'\r';
   sleep 1; done
 
 }
