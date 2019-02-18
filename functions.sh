@@ -383,7 +383,7 @@ if [[ $(docker ps --format '{{.Names}}' | grep traefik) == "traefik" ]]; then
   docker rm traefik; fi
 
 file="/opt/appdata/traefik"
-if [ -e "$file" ]; then; rm -rf /opt/appdata/traefik; fi
+if [ -e "$file" ]; then rm -rf /opt/appdata/traefik; fi
 
 ansible-playbook /opt/traefik/traefik.yml
 
