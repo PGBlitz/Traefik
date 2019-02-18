@@ -303,7 +303,7 @@ tee <<-EOF
 
 EOF
 
-ansible-playbook /opt/plexguide/containers/portainer.yml
+ansible-playbook /opt/coreapps/apps/portainer.yml
 
 }
 
