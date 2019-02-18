@@ -279,7 +279,7 @@ postdeploy() {
   delseconds=$[${tempseconds}+10]
 
 docker stop traefik 1>/dev/null 2>&1
-docker rm treafik 1>/dev/null 2>&1
+docker rm traefik 1>/dev/null 2>&1
 docker rm -rf /opt/appdata/traefik 1>/dev/null 2>&1
 
 tee <<-EOF
@@ -303,6 +303,7 @@ while [[ "$delseconds" -ge "1" ]]; do
   sleep 1; done
 
 tee <<-EOF
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Rebuilding Portainer
