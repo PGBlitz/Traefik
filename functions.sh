@@ -338,9 +338,11 @@ touch /opt/appdata/plexguide/traefikportainer.check
 wget -q "https://portainer.${domain}.com" -O "/opt/appdata/plexguide/traefikportainer.check"
 
 if [[ $(cat /opt/appdata/plexguide/traefikportainer.check) == "" ]]; then
+  echo ""
   echo "Failed"
   rm -rf /opt/appdata/plexguide/traefikportainer.check
 else
+  echo ""
   echo "Passed"
   rm -rf /opt/appdata/plexguide/traefikportainer.check
 fi
