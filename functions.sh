@@ -206,6 +206,8 @@ tee <<-EOF
 [5] DNS Delay Check     : [$delaycheck] Seconds
 EOF
 
+# skips if no provider is set
+if [[ $(cat /var/plexguide/traefik.provider) != "NOT-SET" ]]; then
   # Generates Rest of Inbetween Interface
 
   pnum=5
@@ -232,6 +234,7 @@ EOF
 
     echo "[$pnum] ${filler}${p}"
   done </var/plexguide/prolist/prolist.sh
+fi
 
 # Last Piece of the Interface
 tee <<-EOF
