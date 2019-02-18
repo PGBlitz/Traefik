@@ -278,10 +278,6 @@ postdeploy() {
   tempseconds=$(cat /var/plexguide/server.delaycheck)
   delseconds=$[${tempseconds}+10]
 
-docker stop traefik 1>/dev/null 2>&1
-docker rm traefik 1>/dev/null 2>&1
-docker rm -rf /opt/appdata/traefik 1>/dev/null 2>&1
-
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -381,6 +377,10 @@ while read p; do
   echo -n "      ${p}: " >> /opt/traefik/provider.yml
   echo $(cat "/var/plexguide/traefik/$provider/$p") >> /opt/traefik/provider.yml
 done </var/plexguide/prolist/prolist.sh
+
+docker stop traefik 1>/dev/null 2>&1
+docker rm traefik 1>/dev/null 2>&1
+docker rm -rf /opt/appdata/traefik 1>/dev/null 2>&1
 
 ansible-playbook /opt/traefik/traefik.yml
 
