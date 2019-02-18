@@ -309,6 +309,41 @@ EOF
 
 ansible-playbook /opt/coreapps/apps/portainer.yml
 
+delseconds=10
+domain=$(cat /var/plexguide/server.domain)
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Portainer Check
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NOTE 1: Do NOT EXIT this interface. Please standby for valdation checks!
+
+NOTE 2: Checking on https://portainer.${domain}'s existance. Please allow
+10 seconds for portainer to boot up.
+
+NOTE 3: Be aware that simple mistakes such as bad input, bad domain, or
+not knowing what your doing counts for 75% of the problems.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+while [[ "$delseconds" -ge "1" ]]; do
+delseconds=$[${delseconds}-1]
+echo -ne "Stand By - Portainer Validation Checks: $delseconds Seconds  "'\r';
+sleep 1; done
+
+touch /var/appdata/plexguide/traefikportainer.check
+wget -q "https://portainer.${domain}.com" -O "/var/appdata/plexguide/traefikportainer.check"
+
+if [[ $(cat /var/appdata/plexguide/traefikportainer.check) == "" ]]; then
+  echo "Failed"
+  rm -rf /var/appdata/plexguide/traefikportainer.check
+else
+  echo "Passed"
+  rm -rf /var/appdata/plexguide/traefikportainer.check
+fi
 }
 
 providerinterface() {
