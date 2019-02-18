@@ -51,8 +51,8 @@
         src: traefik.toml
         dest: /opt/appdata/traefik/traefik.toml
         force: yes
-        owner: 1000
-        group: 1000
+        owner: '1000'
+        group: '1000'
 
     - name: Check acme.json exists
       stat:
@@ -65,8 +65,8 @@
         dest: /opt/appdata/traefik/acme/acme.json
         force: yes
         mode: 0600
-        owner: 1000
-        group: 1000
+        owner: '1000'
+        group: '1000'
       when: acme_json.stat.exists == False
     # MAIN #####################################################################
     - name: Deploy Traefik
