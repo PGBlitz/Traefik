@@ -295,7 +295,7 @@ EOF
 
 while [[ "$delseconds" -ge "1" ]]; do
   delseconds=$[${delseconds}-1]
-  echo -ne "Stand By - Traefik Validaiton Process: $delseconds Seconds"'\r';
+  echo -ne "Stand By - Traefik Validaiton Process: $delseconds Seconds  "'\r';
   sleep 1; done
 
 tee <<-EOF
