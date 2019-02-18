@@ -378,9 +378,12 @@ while read p; do
   echo $(cat "/var/plexguide/traefik/$provider/$p") >> /opt/traefik/provider.yml
 done </var/plexguide/prolist/prolist.sh
 
-docker stop traefik 1>/dev/null 2>&1
-docker rm traefik 1>/dev/null 2>&1
-docker rm -rf /opt/appdata/traefik 1>/dev/null 2>&1
+if [[ $(docker ps --format '{{.Names}}' | grep traefik) == "traefik" ]]; then
+  docker stop traefik
+  docker rm traefik; fi
+
+file="/opt/appdata/traefik"
+if [ -e "$file" ]; rm -rf /opt/appdata/traefik; fi
 
 ansible-playbook /opt/traefik/traefik.yml
 
