@@ -36,14 +36,14 @@ entryPoint = "https"
     provider = "{{provider.stdout}}"
     delayBeforeCheck = "{{delaycheck.stdout}}"
 
-#[[acme.domains]]
-#  main = "{{domain.stdout}}"
-#[[acme.domains]]
-#  main = "*.{{domain.stdout}}"
-
 [[acme.domains]]
   main = "{{domain.stdout}}"
-  sans = ["{{domain.stdout}}"]
+[[acme.domains]]
+  main = "*.{{domain.stdout}}"
+
+#[[acme.domains]]
+#  main = "{{domain.stdout}}"
+#  sans = ["{{domain.stdout}}"]
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
