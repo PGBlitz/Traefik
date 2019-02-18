@@ -278,6 +278,10 @@ postdeploy() {
   tempseconds=$(cat /var/plexguide/server.delaycheck)
   delseconds=$[${tempseconds}+10]
 
+docker stop traefik 1>/dev/null 2>&1
+docker rm treafik 1>/dev/null 2>&1
+docker rm -rf /opt/appdata/traefik 1>/dev/null 2>&1
+
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
