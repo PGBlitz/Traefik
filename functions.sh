@@ -335,14 +335,14 @@ echo -ne "Stand By - Portainer Validation Checks: $delseconds Seconds  "'\r';
 sleep 1; done
 
 touch /var/appdata/plexguide/traefikportainer.check
-wget -q "https://portainer.${domain}.com" -O "/var/appdata/plexguide/traefikportainer.check"
+wget -q "https://portainer.${domain}.com" -O "/opt/appdata/plexguide/traefikportainer.check"
 
-if [[ $(cat /var/appdata/plexguide/traefikportainer.check) == "" ]]; then
+if [[ $(cat /opt/appdata/plexguide/traefikportainer.check) == "" ]]; then
   echo "Failed"
-  rm -rf /var/appdata/plexguide/traefikportainer.check
+  rm -rf /opt/appdata/plexguide/traefikportainer.check
 else
   echo "Passed"
-  rm -rf /var/appdata/plexguide/traefikportainer.check
+  rm -rf /opt/appdata/plexguide/traefikportainer.check
 fi
 }
 
