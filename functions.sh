@@ -360,8 +360,8 @@ echo "
 - name: 'Setting PG ENV'
   set_fact:
     pg_env:
-      PUID: 1000
-      PGID: 1000
+      PUID: '1000'
+      PGID: '1000'
       PROVIDER: $provider" | tee /opt/traefik/provider.yml
 
 mkdir -p /var/plexguide/prolist
