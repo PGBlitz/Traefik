@@ -291,8 +291,8 @@ tee <<-EOF
 NOTE 1: Do NOT EXIT this interface. Please standby for valdation checks!
 
 NOTE 2: Standing by for [$tempseconds] + 10 seconds per the set DNS delay
-check! When complete, Traefik will reboot and then we will rewrite all
-your containers and then check to see if Traefik Deployed!
+check! When complete, the portainer will be rebuilt! If that passes,
+then we will rebuild the rest of the containers!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
