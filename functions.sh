@@ -334,7 +334,7 @@ delseconds=$[${delseconds}-1]
 echo -ne "Stand By - Portainer Validation Checks: $delseconds Seconds  "'\r';
 sleep 1; done
 
-touch /var/appdata/plexguide/traefikportainer.check
+touch /opt/appdata/plexguide/traefikportainer.check
 wget -q "https://portainer.${domain}.com" -O "/opt/appdata/plexguide/traefikportainer.check"
 
 if [[ $(cat /opt/appdata/plexguide/traefikportainer.check) == "" ]]; then
