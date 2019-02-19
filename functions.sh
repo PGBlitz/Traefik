@@ -388,7 +388,11 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 	sleep 3
-	ansible-playbook /opt/coreapps/apps/$app.yml
+
+  #Rebuild Depending on Location
+  if [ -e "/opt/coreapps/apps/$app.yml" ]; then ansible-playbook /opt/coreapps/apps/$app.yml; fi
+  if [ -e "/opt/coreapps/communityapps/$app.yml" ]; then ansible-playbook /opt/coreapps/apps/$app.yml; fi
+
 done
 
 echo ""
