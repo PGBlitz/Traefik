@@ -367,11 +367,11 @@ EOF
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Traefik Process Failed!
+🚀 Traefik Process Failed - Traefik Removed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-  delseconds=3
+  delseconds=5
   while [[ "$delseconds" -ge "1" ]]; do
   delseconds=$[${delseconds}-1]
   echo -ne "StandBy - Removing Traefik: $delseconds Seconds  "'\r';
