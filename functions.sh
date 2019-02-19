@@ -249,6 +249,10 @@ if [[ $(cat /var/plexguide/traefik.provider) != "NOT-SET" ]]; then
   done </var/plexguide/prolist/prolist.sh
 fi
 
+# If message.c exists due to incorrect working traefik, this will show
+if [ -e "/opt/appdata/plexguide/emergency/message.c" ]; then
+  deployed="DEPLOYED - INCORRECTLY"; fi
+
 # Last Piece of the Interface
 tee <<-EOF
 
