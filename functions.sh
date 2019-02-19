@@ -366,7 +366,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Portainer Check: FAILED!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SMART TIP: Check Portainer Now! Traefik when proceeding!
+SMART TIP: Check Portainer Now! View the Traefik Logs!
 
 REASON 1 - CloudFlare: portainer is not set in the CNAME or A Records
 REASON 2 - DuckDNS   : Forgot to create a portainer or * - A Record
@@ -375,6 +375,7 @@ REASON 4 - DelayValue: Set too low; CF users reported using 90 to work
 REASON 5 - OverUse   : Deployed too much; hit LetsEncrypt Weekly Limit
 REASON 6 - User      : PG Locally; Route is not enable to reach server
 REASON 7 - User      : Bad values input or failed to read the wiki
+REASON 8 - User      : Forgot to point DOMAIN to CORRECT IP ADDRESS
 
 There are multiple reason for failure! Visit the forums, wiki, or discord!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -491,7 +492,7 @@ EOF
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
     echo
   done
-  echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5-) > /var/plexguide/traefik.provider
+  echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' ) > /var/plexguide/traefik.provider
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

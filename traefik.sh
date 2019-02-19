@@ -10,8 +10,7 @@ source /opt/traefik/functions.sh
 traefikstart() {
 
 # Remove Deploy Block Deploy When Startups - Regenerates if Conditions Not Met
-file="/var/plexguide/traefik/block.deploy"
-if [ -e "$file" ]; then rm -rf /var/plexguide/traefik/block.deploy ; fi
+if [ -e "/var/plexguide/traefik/block.deploy" ]; then rm -rf /var/plexguide/traefik/block.deploy ; fi
 
 traefikpaths #functions
 traefikstatus #functions
