@@ -284,7 +284,7 @@ tee <<-EOF
 🚀 Standby for Traefik Deployment Validation
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE 1: Do NOT EXIT this interface. Please standby for valdation checks!
+NOTE 1: Do NOT EXIT this interface. Please standby for validation checks!
 
 NOTE 2: Standing by for [$tempseconds] + 10 seconds per the set DNS delay
 check! When complete, Portainer will be rebuilt! If that passes,
@@ -295,7 +295,7 @@ EOF
 
 while [[ "$delseconds" -ge "1" ]]; do
   delseconds=$[${delseconds}-1]
-  echo -ne "Stand By - Traefik Validaiton Process: $delseconds Seconds  "'\r';
+  echo -ne "StandBy - Traefik Validaiton Process: $delseconds Seconds  "'\r';
   sleep 1; done
 
 tee <<-EOF
@@ -318,10 +318,10 @@ tee <<-EOF
 🚀 Portainer Check
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE 1: Do NOT EXIT this interface. Please standby for valdation checks!
+NOTE 1: Do NOT EXIT this interface. Please standby for validation checks!
 
-NOTE 2: Checking on https://portainer.${domain}'s existance. Please allow
-10 seconds for portainer to boot up.
+NOTE 2: Checking on https://portainer.${domain}'s existance.
+Please allow 10 seconds for portainer to boot up.
 
 NOTE 3: Be aware that simple mistakes such as bad input, bad domain, or
 not knowing what your doing counts for 75% of the problems.
@@ -331,7 +331,7 @@ EOF
 
 while [[ "$delseconds" -ge "1" ]]; do
 delseconds=$[${delseconds}-1]
-echo -ne "Stand By - Portainer Validation Checks: $delseconds Seconds  "'\r';
+echo -ne "StandBy - Portainer Validation Checks: $delseconds Seconds  "'\r';
 sleep 1; done
 
 touch /opt/appdata/plexguide/traefikportainer.check
@@ -394,7 +394,7 @@ EOF
   delseconds=4
   while [[ "$delseconds" -ge "1" ]]; do
   delseconds=$[${delseconds}-1]
-  echo -ne "Stand By - Rebuilding Containers in: $delseconds Seconds  "'\r';
+  echo -ne "StandBy - Rebuilding Containers in: $delseconds Seconds  "'\r';
   sleep 1; done
 
   docker ps -a --format "{{.Names}}"  > /var/plexguide/container.running
