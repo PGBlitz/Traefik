@@ -35,6 +35,7 @@ case $typed in
       bash /opt/traefik/traefik.sh
       exit ;;
     a )
+      blockdeploycheck
       deploytraefik
       bash /opt/traefik/traefik.sh
       exit ;;
