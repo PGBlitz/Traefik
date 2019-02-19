@@ -502,7 +502,7 @@ echo "
     pg_env:
       PUID: '1000'
       PGID: '1000'
-      PROVIDER: $provider" | tee /opt/traefik/provider.yml
+      PROVIDER: $provider" | tee /opt/traefik/provider.yml 1>/dev/null 2>&1
 
 mkdir -p /var/plexguide/prolist
 rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
