@@ -348,14 +348,15 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Portainer Check: FAILED!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SMART TIP: Check Portainer Now! Traefik when proceeding!
+
 REASON 1 - CloudFlare: portainer is not set in the CNAME or A Records
 REASON 2 - DuckDNS   : Forgot to create a portainer or * - A Record
 REASON 3 - Firewall  : Everything is blocked
 REASON 4 - DelayValue: Set too low; CF users reported using 90 to work
 REASON 5 - OverUse   : Deployed too much; hit LetsEncrypt Weekly Limit
 REASON 6 - User      : PG Locally; Route is not enable to reach server
-REASON 7 - User      : Bad values input for the provider
-REASON 8 - User      : Didn't read the wiki and is now paying for it
+REASON 7 - User      : Bad values input or failed to read the wiki
 
 There are multiple reason for failure! Visit the forums, wiki, or discord!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
