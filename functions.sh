@@ -515,8 +515,8 @@ while read p; do
 done </var/plexguide/prolist/prolist.sh
 
 if [[ $(docker ps --format '{{.Names}}' | grep traefik) == "traefik" ]]; then
-  docker stop traefik
-  docker rm traefik; fi
+  docker stop traefik 1>/dev/null 2>&1
+  docker rm traefik 1>/dev/null 2>&1; fi
 
 file="/opt/appdata/traefik"
 if [ -e "$file" ]; then rm -rf /opt/appdata/traefik; fi
