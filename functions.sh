@@ -456,7 +456,7 @@ tee <<-EOF
 ✅️  Traefik - Containers Rebuilt
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-read -p 'Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
+read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
 
 }
 

@@ -19,7 +19,9 @@ layoutbuilder # functions - builds out menu
 
 case $typed in
     1 )
-      traefikstart ;;
+      providerinterface
+      bash /opt/traefik/tld.sh
+      exit ;;
     2 )
       providerinterface
       bash /opt/traefik/traefik.sh
