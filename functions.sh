@@ -92,7 +92,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
       read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-      domaininterface
+      domaininterface; exit 
   fi
 
 tee <<-EOF
