@@ -335,17 +335,70 @@ echo -ne "Stand By - Portainer Validation Checks: $delseconds Seconds  "'\r';
 sleep 1; done
 
 touch /opt/appdata/plexguide/traefikportainer.check
-wget -q "https://portainer.${domain}.com" -O "/opt/appdata/plexguide/traefikportainer.check"
+domain=ffplex.com
+wget -q "https://portainer.${domain}" -O "/opt/appdata/plexguide/traefikportainer.check"
 
 if [[ $(cat /opt/appdata/plexguide/traefikportainer.check) == "" ]]; then
-  echo ""
-  echo "Failed"
   rm -rf /opt/appdata/plexguide/traefikportainer.check
-else
-  echo ""
-  echo "Passed"
-  rm -rf /opt/appdata/plexguide/traefikportainer.check
+  traefikfailsafe
 fi
+
+  rm -rf /opt/appdata/plexguide/traefikportainer.check
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Portainer - https://portainer.${domain} detected!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+  delseconds=4
+  while [[ "$delseconds" -ge "1" ]]; do
+  delseconds=$[${delseconds}-1]
+  echo -ne "Stand By - Rebuilding Containers in: $delseconds Seconds  "'\r';
+  sleep 1; done
+
+  docker ps -a --format "{{.Names}}"  > /var/plexguide/container.running
+
+  # Containers to Exempt
+  sed -i -e "/traefik/d" /var/plexguide/container.running
+  sed -i -e "/watchtower/d" /var/plexguide/container.running
+  sed -i -e "/wp-*/d" /var/plexguide/container.running # Exempt WP DataBases
+  sed -i -e "/x2go*/d" /var/plexguide/container.running
+  sed -i -e "/authclient/d" /var/plexguide/container.running
+  sed -i -e "/dockergc/d" /var/plexguide/container.running
+  sed -i -e "/oauth/d" /var/plexguide/container.running
+  sed -i -e "/portainer/d" /var/plexguide/container.running # Already Rebuilt
+
+  count=$(wc -l < /var/plexguide/container.running)
+  ((count++))
+  ((count--))
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+⚠️  Traefik - Rebuilding Containers!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+  sleep 3
+  for ((i=1; i<$count+1; i++)); do
+  	app=$(sed "${i}q;d" /var/plexguide/container.running)
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+↘️  Traefik - Rebuilding [$app]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+	sleep 3
+	ansible-playbook /opt/coreapps/apps/$app.yml
+done
+
+echo ""
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅️  Traefik - Containers Rebuilt
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+read -p 'Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
+
 }
 
 providerinterface() {
