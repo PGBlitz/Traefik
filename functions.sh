@@ -375,6 +375,9 @@ EOF
   echo -ne "StandBy - Removing Traefik: $delseconds Seconds  "'\r';
   sleep 1; done
 
+  docker stop traefik 1>/dev/null 2>&1
+  docker rm traefik 1>/dev/null 2>&1
+
   read -p 'Try Again! Acknowledge Info | Press [ENTER] ' name < /dev/tty
   traefikstart
 fi
