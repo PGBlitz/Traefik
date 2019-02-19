@@ -164,7 +164,7 @@ EOF
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
 
 ### fix bug if user doesn't type .
-  if [[ $(echo $typed | grep ".") == "" ]]; then
+  if [[ $(echo $typed | grep "\.") == "" ]]; then
 
 tee <<-EOF
 
@@ -173,10 +173,10 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
       read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-      emailinterface
+      emailinterface; bash /opt/traefik/traefik.sh; exit
   fi
 
-  if [[ $(echo $typed | grep "@") == "" ]]; then
+  if [[ $(echo $typed | grep "\@") == "" ]]; then
 
 tee <<-EOF
 
@@ -185,7 +185,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
       read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-      emailinterface
+      emailinterface; bash /opt/traefik/traefik.sh; exit
+
   fi
 
 tee <<-EOF
