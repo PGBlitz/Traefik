@@ -492,7 +492,7 @@ EOF
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
     echo
   done
-  echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5- ) > /var/plexguide/traefik.provider
+  echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) > /var/plexguide/traefik.provider
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
