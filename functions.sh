@@ -12,7 +12,7 @@ main() {
 }
 
 blockdeploycheck() {
-    if [[ $(cat /var/plexguide/traefik.provider) == "NOT-SET" || $(cat /var/plexguide/server.domain) == "NOT-SET" || $(cat /var/plexguide/server.email) == "NOT-SET"]]; then
+    if [[ $(cat /var/plexguide/traefik.provider) == "NOT-SET" || $(cat /var/plexguide/server.domain) == "NOT-SET" || $(cat /var/plexguide/server.email) == "NOT-SET" ]]; then
       read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty
       traefikstart
     fi
