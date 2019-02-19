@@ -13,6 +13,7 @@ main() {
 
 blockdeploycheck() {
     if [[ $(cat /var/plexguide/traefik.provider) == "NOT-SET" || $(cat /var/plexguide/server.domain) == "NOT-SET" || $(cat /var/plexguide/server.email) == "NOT-SET" ]]; then
+      echo
       read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty
       traefikstart
     fi
@@ -48,10 +49,10 @@ tee <<-EOF
 🚀 New DNS Delay Check Value: [$typed2] Seconds
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NOTE 1: Make all changes first.  Traefik must be deployed/redeployed for
+NOTE 1: Make all changes first. Traefik must be deployed/redeployed for
 this to take affect!
 
-NOTE 2: When deploying Traefik, you will be require to wait at least $typed
+NOTE 2: When deploying Traefik, you will be required to wait at least $typed
 seconds as a result of the check.
 
 EOF
