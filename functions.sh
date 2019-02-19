@@ -335,7 +335,6 @@ echo -ne "StandBy - Portainer Validation Checks: $delseconds Seconds  "'\r';
 sleep 1; done
 
 touch /opt/appdata/plexguide/traefikportainer.check
-domain=ffplex.com
 wget -q "https://portainer.${domain}" -O "/opt/appdata/plexguide/traefikportainer.check"
 
 # If Portainer Detection Failed
@@ -367,25 +366,20 @@ EOF
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Traefik Process Failed - Traefik Removed!
+🚀 Traefik Process Failed!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SMART TIP: When fixed, rerun this process again!
+
+NOTE 1: Possibly unable to reach subdomains
+NOTE 2: Subdomains will provide insecure warnings
+
 EOF
-
-  delseconds=5
-  while [[ "$delseconds" -ge "1" ]]; do
-  delseconds=$[${delseconds}-1]
-  echo -ne "StandBy - Removing Traefik: $delseconds Seconds  "'\r';
-  sleep 1; done
-
-  docker stop traefik 1>/dev/null 2>&1
-  docker rm traefik 1>/dev/null 2>&1
 
   read -p 'Try Again! Acknowledge Info | Press [ENTER] ' name < /dev/tty
   traefikstart
 fi
 
 tee <<-EOF
-
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Portainer - https://portainer.${domain} detected!
