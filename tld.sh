@@ -123,5 +123,6 @@ fi
 if [ -e "/opt/coreapps/apps/$new.yml" ]; then ansible-playbook /opt/coreapps/apps/$new.yml; fi
 if [ -e "/opt/coreapps/communityapps/$new.yml" ]; then ansible-playbook /opt/coreapps/apps/$new.yml; fi
 echo "standard" > /var/plexguide/tld.type
-
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
