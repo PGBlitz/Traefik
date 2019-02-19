@@ -338,13 +338,48 @@ touch /opt/appdata/plexguide/traefikportainer.check
 domain=ffplex.com
 wget -q "https://portainer.${domain}" -O "/opt/appdata/plexguide/traefikportainer.check"
 
+# If Portainer Detection Failed
 if [[ $(cat /opt/appdata/plexguide/traefikportainer.check) == "" ]]; then
   rm -rf /opt/appdata/plexguide/traefikportainer.check
-  traefikfailsafe
+
+tee <<-EOF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Portainer Check: FAILED!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REASON 1 - CloudFlare: portainer is not set in the CNAME or A Records
+REASON 2 - DuckDNS   : Forgot to create a portainer or * - A Record
+REASON 3 - Firewall  : Everything is blocked
+REASON 4 - DelayValue: Set too low; CF users reported using 90 to work
+REASON 5 - OverUse   : Deployed too much; hit LetsEncrypt Weekly Limit
+REASON 6 - User      : PG Locally; Route is not enable to reach server
+REASON 7 - User      : Bad values input for the provider
+REASON 8 - User      : Didn't read the wiki and is now paying for it
+
+There are multiple reason for failure! Visit the forums, wiki, or discord!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+  read -p 'Acknowledge Info | Press [ENTER] ' name < /dev/tty
+
+tee <<-EOF
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚀 Traefik Process Failed!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EOF
+
+  delseconds=3
+  while [[ "$delseconds" -ge "1" ]]; do
+  delseconds=$[${delseconds}-1]
+  echo -ne "StandBy - Removing Traefik: $delseconds Seconds  "'\r';
+  sleep 1; done
+
+  read -p 'Try Again! Acknowledge Info | Press [ENTER] ' name < /dev/tty
+  traefikstart
 fi
 
-  rm -rf /opt/appdata/plexguide/traefikportainer.check
 tee <<-EOF
+
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Portainer - https://portainer.${domain} detected!
@@ -374,6 +409,7 @@ EOF
   ((count--))
 
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⚠️  Traefik - Rebuilding Containers!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -383,6 +419,7 @@ EOF
   	app=$(sed "${i}q;d" /var/plexguide/container.running)
 
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ↘️  Traefik - Rebuilding [$app]
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -395,8 +432,8 @@ EOF
 
 done
 
-echo ""
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅️  Traefik - Containers Rebuilt
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
