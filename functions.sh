@@ -92,7 +92,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
       read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-      domaininterface; exit 
+      domaininterface; bash /opt/traefik/traefik.sh; exit
   fi
 
 tee <<-EOF
