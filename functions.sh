@@ -12,7 +12,7 @@ main() {
 }
 
 blockdeploycheck() {
-    if [[ $(cat /var/plexguide/traefik.provider) == "NOT-SET" || $(cat /var/plexguide/server.domain) == "NOT-SET" || $(cat /var/plexguide/server.email) == "NOT-SET" ]]; then
+    if [[ $(cat pg/data/traefik.provider) == "NOT-SET" || $(cat pg/data/server.domain) == "NOT-SET" || $(cat pg/data/server.email) == "NOT-SET" ]]; then
       echo
       read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty
       traefikstart
@@ -56,7 +56,7 @@ NOTE 2: When deploying Traefik, you will be required to wait at least $typed
 seconds as a result of the check.
 
 EOF
-  echo "$typed2" > /var/plexguide/server.delaycheck
+  echo "$typed2" > pg/data/server.delaycheck
   read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
@@ -95,7 +95,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
       read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-      domaininterface; bash /opt/traefik/traefik.sh; exit
+      domaininterface; bash /pg/traefik/traefik.sh; exit
   fi
 
 tee <<-EOF
@@ -107,7 +107,7 @@ NOTE: Traefik must be deployed/redeployed for the domain name changes to
 take affect!
 
 EOF
-  echo $typed > /var/plexguide/server.domain
+  echo $typed > pg/data/server.domain
   read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
@@ -126,17 +126,17 @@ EMail Address  : $email
 EOF
 
 pnum=0
-mkdir -p /var/plexguide/prolist
-rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+mkdir -p pg/data/prolist
+rm -rf pg/data/prolist/* 1>/dev/null 2>&1
 
-ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
+ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > pg/data/prolist/prolist.sh
 
 while read p; do
   let "pnum++"
   echo -n "${p} - "
-  echo -n $(cat "/var/plexguide/traefik/$provider/$p")
+  echo -n $(cat "pg/data/traefik/$provider/$p")
   echo
-done </var/plexguide/prolist/prolist.sh
+done <pg/data/prolist/prolist.sh
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 echo
@@ -176,7 +176,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
       read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-      emailinterface; bash /opt/traefik/traefik.sh; exit
+      emailinterface; bash /pg/traefik/traefik.sh; exit
   fi
 
   if [[ $(echo $typed | grep "\@") == "" ]]; then
@@ -188,7 +188,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
       read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
-      emailinterface; bash /opt/traefik/traefik.sh; exit
+      emailinterface; bash /pg/traefik/traefik.sh; exit
 
   fi
 
@@ -202,7 +202,7 @@ NOTE: Make all changes first.  Traefik must be deployed/redeployed for
 the email name changes to take affect!
 
 EOF
-  echo $typed > /var/plexguide/server.email
+  echo $typed > pg/data/server.email
   read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
@@ -224,37 +224,37 @@ tee <<-EOF
 EOF
 
 # skips if no provider is set
-if [[ $(cat /var/plexguide/traefik.provider) != "NOT-SET" ]]; then
+if [[ $(cat pg/data/traefik.provider) != "NOT-SET" ]]; then
   # Generates Rest of Inbetween Interface
 
   pnum=5
-  mkdir -p /var/plexguide/prolist
-  rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+  mkdir -p pg/data/prolist
+  rm -rf pg/data/prolist/* 1>/dev/null 2>&1
 
-  ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
+  ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > pg/data/prolist/prolist.sh
 
   # Set Provider for the Process
-  provider7=$(cat /var/plexguide/traefik.provider)
-  mkdir -p "/var/plexguide/traefik/$provider7"
+  provider7=$(cat pg/data/traefik.provider)
+  mkdir -p "pg/data/traefik/$provider7"
 
   while read p; do
     let "pnum++"
-    echo "$p" > "/var/plexguide/prolist/$pnum"
-    echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
+    echo "$p" > "pg/data/prolist/$pnum"
+    echo "[$pnum] $p" >> pg/data/prolist/final.sh
 
     # Generates a Not-Set for the Echo Below
-    file="/var/plexguide/traefik/$provider7/$p"
+    file="pg/data/traefik/$provider7/$p"
       if [ ! -e "$file" ]; then
         filler="** NOT SET - "
-        touch /var/plexguide/traefik/block.deploy
+        touch pg/data/traefik/block.deploy
       else filler=""; fi
 
     echo "[$pnum] ${filler}${p}"
-  done </var/plexguide/prolist/prolist.sh
+  done <pg/data/prolist/prolist.sh
 fi
 
 # If message.c exists due to incorrect working traefik, this will show
-if [ -e "/opt/appdata/plexguide/emergency/message.c" ]; then
+if [ -e "/pg/data/plexguide/emergency/message.c" ]; then
   deployed="DEPLOYED - INCORRECTLY"; fi
 
 # Last Piece of the Interface
@@ -276,7 +276,7 @@ EOF
 }
 
 layoutprompt() {
-  process5=$(cat /var/plexguide/prolist/final.sh | grep "$typed" | cut -c 5-)
+  process5=$(cat pg/data/prolist/final.sh | grep "$typed" | cut -c 5-)
 
 tee <<-EOF
 
@@ -289,7 +289,7 @@ EOF
   read -p 'Input Value | Press [ENTER]: ' typed < /dev/tty
   if [[ "$typed" = "exit" || "$typed" = "Exit" || "$typed" = "EXIT" ]]; then traefikstart; fi
 
-echo "$typed" > "/var/plexguide/traefik/$provider7/$process5"
+echo "$typed" > "pg/data/traefik/$provider7/$process5"
 echo
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p 'Information Stored | Press [ENTER] ' typed < /dev/tty
@@ -297,7 +297,7 @@ read -p 'Information Stored | Press [ENTER] ' typed < /dev/tty
 }
 
 postdeploy() {
-  tempseconds=$(cat /var/plexguide/server.delaycheck)
+  tempseconds=$(cat pg/data/server.delaycheck)
   delseconds=$[${tempseconds}+10]
 
 tee <<-EOF
@@ -329,10 +329,10 @@ tee <<-EOF
 
 EOF
 
-ansible-playbook /opt/coreapps/apps/portainer.yml
+ansible-playbook /pg/coreapps/apps/portainer.yml
 
 delseconds=10
-domain=$(cat /var/plexguide/server.domain)
+domain=$(cat pg/data/server.domain)
 
 tee <<-EOF
 
@@ -356,12 +356,12 @@ delseconds=$[${delseconds}-1]
 echo -ne "StandBy - Portainer Validation Checks: $delseconds Seconds  "'\r';
 sleep 1; done
 
-touch /opt/appdata/plexguide/traefikportainer.check
-wget -q "https://portainer.${domain}" -O "/opt/appdata/plexguide/traefikportainer.check"
+touch /pg/data/plexguide/traefikportainer.check
+wget -q "https://portainer.${domain}" -O "/pg/data/plexguide/traefikportainer.check"
 
 # If Portainer Detection Failed
-if [[ $(cat /opt/appdata/plexguide/traefikportainer.check) == "" ]]; then
-  rm -rf /opt/appdata/plexguide/traefikportainer.check
+if [[ $(cat /pg/data/plexguide/traefikportainer.check) == "" ]]; then
+  rm -rf /pg/data/plexguide/traefikportainer.check
 
 tee <<-EOF
 
@@ -416,19 +416,19 @@ EOF
   echo -ne "StandBy - Rebuilding Containers in: $delseconds Seconds  "'\r';
   sleep 1; done
 
-  docker ps -a --format "{{.Names}}"  > /var/plexguide/container.running
+  docker ps -a --format "{{.Names}}"  > pg/data/container.running
 
   # Containers to Exempt
-  sed -i -e "/traefik/d" /var/plexguide/container.running
-  sed -i -e "/watchtower/d" /var/plexguide/container.running
-  sed -i -e "/wp-*/d" /var/plexguide/container.running # Exempt WP DataBases
-  sed -i -e "/x2go*/d" /var/plexguide/container.running
-  sed -i -e "/authclient/d" /var/plexguide/container.running
-  sed -i -e "/dockergc/d" /var/plexguide/container.running
-  sed -i -e "/oauth/d" /var/plexguide/container.running
-  sed -i -e "/portainer/d" /var/plexguide/container.running # Already Rebuilt
+  sed -i -e "/traefik/d" pg/data/container.running
+  sed -i -e "/watchtower/d" pg/data/container.running
+  sed -i -e "/wp-*/d" pg/data/container.running # Exempt WP DataBases
+  sed -i -e "/x2go*/d" pg/data/container.running
+  sed -i -e "/authclient/d" pg/data/container.running
+  sed -i -e "/dockergc/d" pg/data/container.running
+  sed -i -e "/oauth/d" pg/data/container.running
+  sed -i -e "/portainer/d" pg/data/container.running # Already Rebuilt
 
-  count=$(wc -l < /var/plexguide/container.running)
+  count=$(wc -l < pg/data/container.running)
   ((count++))
   ((count--))
 
@@ -441,7 +441,7 @@ tee <<-EOF
 EOF
   sleep 3
   for ((i=1; i<$count+1; i++)); do
-  	app=$(sed "${i}q;d" /var/plexguide/container.running)
+  	app=$(sed "${i}q;d" pg/data/container.running)
 
 tee <<-EOF
 
@@ -452,8 +452,8 @@ EOF
 	sleep 3
 
   #Rebuild Depending on Location
-  if [ -e "/opt/coreapps/apps/$app.yml" ]; then ansible-playbook /opt/coreapps/apps/$app.yml; fi
-  if [ -e "/opt/coreapps/communityapps/$app.yml" ]; then ansible-playbook /opt/communityapps/apps/$app.yml; fi
+  if [ -e "/pg/coreapps/apps/$app.yml" ]; then ansible-playbook /pg/coreapps/apps/$app.yml; fi
+  if [ -e "/pg/coreapps/communityapps/$app.yml" ]; then ansible-playbook /pg/communityapps/apps/$app.yml; fi
 
 done
 
@@ -475,18 +475,18 @@ tee <<-EOF
 
 EOF
   pnum=0
-  mkdir -p /var/plexguide/prolist
-  rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+  mkdir -p pg/data/prolist
+  rm -rf pg/data/prolist/* 1>/dev/null 2>&1
 
-  ls -la "/opt/traefik/providers" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
+  ls -la "/pg/traefik/providers" | awk '{print $9}' | tail -n +4 > pg/data/prolist/prolist.sh
 
   while read p; do
     let "pnum++"
-    echo "$p" > "/var/plexguide/prolist/$pnum"
-    echo "[$pnum] $p" >> /var/plexguide/prolist/final.sh
-  done </var/plexguide/prolist/prolist.sh
+    echo "$p" > "pg/data/prolist/$pnum"
+    echo "[$pnum] $p" >> pg/data/prolist/final.sh
+  done <pg/data/prolist/prolist.sh
 
-  cat /var/plexguide/prolist/final.sh
+  cat pg/data/prolist/final.sh
   echo
   typed2=999999999
   while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
@@ -495,7 +495,7 @@ EOF
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
     echo
   done
-  echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) > /var/plexguide/traefik.provider
+  echo $(cat pg/data/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) > pg/data/traefik.provider
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -511,7 +511,7 @@ EOF
 
 traefikbuilder() {
 
-provider=$(cat /var/plexguide/traefik.provider)
+provider=$(cat pg/data/traefik.provider)
 
 echo "
 
@@ -520,32 +520,32 @@ echo "
     pg_env:
       PUID: '1000'
       PGID: '1000'
-      PROVIDER: $provider" | tee /opt/traefik/provider.yml 1>/dev/null 2>&1
+      PROVIDER: $provider" | tee /pg/traefik/provider.yml 1>/dev/null 2>&1
 
-mkdir -p /var/plexguide/prolist
-rm -rf /var/plexguide/prolist/* 1>/dev/null 2>&1
+mkdir -p pg/data/prolist
+rm -rf pg/data/prolist/* 1>/dev/null 2>&1
 
-ls -la "/opt/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /var/plexguide/prolist/prolist.sh
+ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > pg/data/prolist/prolist.sh
 
 while read p; do
-  echo -n "      ${p}: " >> /opt/traefik/provider.yml
-  echo $(cat "/var/plexguide/traefik/$provider/$p") >> /opt/traefik/provider.yml
-done </var/plexguide/prolist/prolist.sh
+  echo -n "      ${p}: " >> /pg/traefik/provider.yml
+  echo $(cat "pg/data/traefik/$provider/$p") >> /pg/traefik/provider.yml
+done <pg/data/prolist/prolist.sh
 
 if [[ $(docker ps --format '{{.Names}}' | grep traefik) == "traefik" ]]; then
   docker stop traefik 1>/dev/null 2>&1
   docker rm traefik 1>/dev/null 2>&1; fi
 
-file="/opt/appdata/traefik"
-if [ -e "$file" ]; then rm -rf /opt/appdata/traefik; fi
+file="/pg/data/traefik"
+if [ -e "$file" ]; then rm -rf /pg/data/traefik; fi
 
-ansible-playbook /opt/traefik/traefik.yml
+ansible-playbook /pg/traefik/traefik.yml
 
 postdeploy
 }
 
 traefikpaths() {
-  mkdir -p /var/plexguide/traefik
+  mkdir -p pg/data/traefik
 }
 
 traefikstatus() {

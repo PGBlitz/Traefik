@@ -7,23 +7,23 @@
 ################################################################################
 
 # To Get List for Rebuilding or TLD
-docker ps --format '{{.Names}}' > /tmp/backup.list
-sed -i -e "/traefik/d" /tmp/backup.list
-sed -i -e "/watchtower/d" /tmp/backup.list
-sed -i -e "/wp-*/d" /tmp/backup.list
-sed -i -e "/x2go*/d" /tmp/backup.list
-sed -i -e "/plexguide/d" /tmp/backup.list
-sed -i -e "/cloudplow/d" /tmp/backup.list
-sed -i -e "/oauth/d" /tmp/backup.list
-sed -i -e "/pgui/d" /tmp/backup.list
+docker ps --format '{{.Names}}' > /pg/data/backup.list
+sed -i -e "/traefik/d" /pg/data/backup.list
+sed -i -e "/watchtower/d" /pg/data/backup.list
+sed -i -e "/wp-*/d" /pg/data/backup.list
+sed -i -e "/x2go*/d" /pg/data/backup.list
+sed -i -e "/plexguide/d" /pg/data/backup.list
+sed -i -e "/cloudplow/d" /pg/data/backup.list
+sed -i -e "/oauth/d" /pg/data/backup.list
+sed -i -e "/pgui/d" /pg/data/backup.list
 
-rm -rf /tmp/backup.build 1>/dev/null 2>&1
+rm -rf /pg/data/backup.build 1>/dev/null 2>&1
 #### Commenting Out To Let User See
 while read p; do
-  echo -n "$p" >> /tmp/backup.build
-  echo -n " " >> /tmp/backup.build
-done </tmp/backup.list
-running=$(cat /tmp/backup.list)
+  echo -n "$p" >> /pg/data/backup.build
+  echo -n " " >> /pg/data/backup.build
+done </pg/data/backup.list
+running=$(cat /pg/data/backup.list)
 
 # If Blank, Exit
 if [ "$running" == "" ]; then
@@ -65,7 +65,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 3
-bash /opt/traefik/tld.sh
+bash /pg/traefik/tld.sh
 exit
 fi
 
@@ -77,7 +77,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 3
-bash /opt/traefik/tld.sh
+bash /pg/traefik/tld.sh
 exit
 else
 tee <<-EOF
@@ -88,8 +88,8 @@ tee <<-EOF
 EOF
 
 # Prevents From Repeating
-cat /var/plexguide/tld.program > /var/plexguide/old.program
-echo "$typed" > /var/plexguide/tld.program
+cat pg/data/tld.program > pg/data/old.program
+echo "$typed" > pg/data/tld.program
 
 sleep 3
 fi
@@ -102,28 +102,28 @@ tee <<-EOF
 EOF
 
 sleep 4
-old=$(cat /var/plexguide/old.program)
-new=$(cat /var/plexguide/tld.program)
+old=$(cat pg/data/old.program)
+new=$(cat pg/data/tld.program)
 
-touch /var/plexguide/tld.type
-tldtype=$(cat /var/plexguide/tld.type)
+touch pg/data/tld.type
+tldtype=$(cat pg/data/tld.type)
 
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
   if [[ "$tldtype" == "standard" ]]; then
-    if [ -e "/opt/coreapps/apps/$old.yml" ]; then ansible-playbook /opt/coreapps/apps/$old.yml; fi
-    if [ -e "/opt/coreapps/communityapps/$old.yml" ]; then ansible-playbook /opt/communityapps/apps/$old.yml; fi
+    if [ -e "/pg/coreapps/apps/$old.yml" ]; then ansible-playbook /pg/coreapps/apps/$old.yml; fi
+    if [ -e "/pg/coreapps/communityapps/$old.yml" ]; then ansible-playbook /pg/communityapps/apps/$old.yml; fi
   elif [[ "$tldtype" == "wordpress" ]]; then
-    echo "$old" > /tmp/wp_id
-    ansible-playbook /opt/pgpress/wordpress.yml
-    echo "$typed" > /tmp/wp_id
+    echo "$old" > /pg/data/wp_id
+    ansible-playbook /pg/pgpress/wordpress.yml
+    echo "$typed" > /pg/data/wp_id
   fi
 
 fi
 
-if [ -e "/opt/coreapps/apps/$new.yml" ]; then ansible-playbook /opt/coreapps/apps/$new.yml; fi
-if [ -e "/opt/coreapps/communityapps/$new.yml" ]; then ansible-playbook /opt/communityapps/apps/$new.yml; fi
-echo "standard" > /var/plexguide/tld.type
+if [ -e "/pg/coreapps/apps/$new.yml" ]; then ansible-playbook /pg/coreapps/apps/$new.yml; fi
+if [ -e "/pg/coreapps/communityapps/$new.yml" ]; then ansible-playbook /pg/communityapps/apps/$new.yml; fi
+echo "standard" > pg/data/tld.type
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
