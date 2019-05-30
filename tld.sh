@@ -105,7 +105,7 @@ sleep 4
 old=$(cat /pg/data/old.program)
 new=$(cat /pg/data/tld.program)
 
-touch/pg/data/tld.type
+touch /pg/data/tld.type
 tldtype=$(cat /pg/data/tld.type)
 
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then

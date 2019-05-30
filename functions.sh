@@ -126,8 +126,8 @@ EMail Address  : $email
 EOF
 
 pnum=0
-mkdir -p/pg/data/prolist
-rm -rf/pg/data/prolist/* 1>/dev/null 2>&1
+mkdir -p /pg/data/prolist
+rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
 ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
 
@@ -228,8 +228,8 @@ if [[ $(cat /pg/data/traefik.provider) != "NOT-SET" ]]; then
   # Generates Rest of Inbetween Interface
 
   pnum=5
-  mkdir -p/pg/data/prolist
-  rm -rf/pg/data/prolist/* 1>/dev/null 2>&1
+  mkdir -p /pg/data/prolist
+  rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
   ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
 
@@ -246,7 +246,7 @@ if [[ $(cat /pg/data/traefik.provider) != "NOT-SET" ]]; then
     file="/pg/data/traefik/$provider7/$p"
       if [ ! -e "$file" ]; then
         filler="** NOT SET - "
-        touch/pg/data/traefik/block.deploy
+        touch /pg/data/traefik/block.deploy
       else filler=""; fi
 
     echo "[$pnum] ${filler}${p}"
@@ -475,8 +475,8 @@ tee <<-EOF
 
 EOF
   pnum=0
-  mkdir -p/pg/data/prolist
-  rm -rf/pg/data/prolist/* 1>/dev/null 2>&1
+  mkdir -p /pg/data/prolist
+  rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
   ls -la "/pg/traefik/providers" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
 
@@ -522,8 +522,8 @@ echo "
       PGID: '1000'
       PROVIDER: $provider" | tee /pg/traefik/provider.yml 1>/dev/null 2>&1
 
-mkdir -p/pg/data/prolist
-rm -rf/pg/data/prolist/* 1>/dev/null 2>&1
+mkdir -p /pg/data/prolist
+rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
 ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
 
@@ -545,7 +545,7 @@ postdeploy
 }
 
 traefikpaths() {
-  mkdir -p/pg/data/traefik
+  mkdir -p /pg/data/traefik
 }
 
 traefikstatus() {
