@@ -12,7 +12,7 @@ main() {
 }
 
 blockdeploycheck() {
-    if [[ $(cat/pg/data/traefik.provider) == "NOT-SET" || $(cat/pg/data/server.domain) == "NOT-SET" || $(cat/pg/data/server.email) == "NOT-SET" ]]; then
+    if [[ $(cat /pg/data/traefik.provider) == "NOT-SET" || $(cat /pg/data/server.domain) == "NOT-SET" || $(cat /pg/data/server.email) == "NOT-SET" ]]; then
       echo
       read -p 'Blocking Deployment! Must Configure Everything! | Press [ENTER]' typed < /dev/tty
       traefikstart
@@ -224,7 +224,7 @@ tee <<-EOF
 EOF
 
 # skips if no provider is set
-if [[ $(cat/pg/data/traefik.provider) != "NOT-SET" ]]; then
+if [[ $(cat /pg/data/traefik.provider) != "NOT-SET" ]]; then
   # Generates Rest of Inbetween Interface
 
   pnum=5
@@ -234,7 +234,7 @@ if [[ $(cat/pg/data/traefik.provider) != "NOT-SET" ]]; then
   ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
 
   # Set Provider for the Process
-  provider7=$(cat/pg/data/traefik.provider)
+  provider7=$(cat /pg/data/traefik.provider)
   mkdir -p "/pg/data/traefik/$provider7"
 
   while read p; do
@@ -276,7 +276,7 @@ EOF
 }
 
 layoutprompt() {
-  process5=$(cat/pg/data/prolist/final.sh | grep "$typed" | cut -c 5-)
+  process5=$(cat /pg/data/prolist/final.sh | grep "$typed" | cut -c 5-)
 
 tee <<-EOF
 
@@ -297,7 +297,7 @@ read -p 'Information Stored | Press [ENTER] ' typed < /dev/tty
 }
 
 postdeploy() {
-  tempseconds=$(cat/pg/data/server.delaycheck)
+  tempseconds=$(cat /pg/data/server.delaycheck)
   delseconds=$[${tempseconds}+10]
 
 tee <<-EOF
@@ -332,7 +332,7 @@ EOF
 ansible-playbook /pg/coreapps/apps/portainer.yml
 
 delseconds=10
-domain=$(cat/pg/data/server.domain)
+domain=$(cat /pg/data/server.domain)
 
 tee <<-EOF
 
@@ -486,7 +486,7 @@ EOF
     echo "[$pnum] $p" >>/pg/data/prolist/final.sh
   done <pg/data/prolist/prolist.sh
 
-  cat/pg/data/prolist/final.sh
+  cat /pg/data/prolist/final.sh
   echo
   typed2=999999999
   while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
@@ -495,7 +495,7 @@ EOF
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
     echo
   done
-  echo $(cat/pg/data/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) >/pg/data/traefik.provider
+  echo $(cat /pg/data/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) >/pg/data/traefik.provider
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -511,7 +511,7 @@ EOF
 
 traefikbuilder() {
 
-provider=$(cat/pg/data/traefik.provider)
+provider=$(cat /pg/data/traefik.provider)
 
 echo "
 

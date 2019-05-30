@@ -88,7 +88,7 @@ tee <<-EOF
 EOF
 
 # Prevents From Repeating
-cat/pg/data/tld.program >/pg/data/old.program
+cat /pg/data/tld.program >/pg/data/old.program
 echo "$typed" >/pg/data/tld.program
 
 sleep 3
@@ -102,11 +102,11 @@ tee <<-EOF
 EOF
 
 sleep 4
-old=$(cat/pg/data/old.program)
-new=$(cat/pg/data/tld.program)
+old=$(cat /pg/data/old.program)
+new=$(cat /pg/data/tld.program)
 
 touch/pg/data/tld.type
-tldtype=$(cat/pg/data/tld.type)
+tldtype=$(cat /pg/data/tld.type)
 
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
