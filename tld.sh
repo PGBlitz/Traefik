@@ -88,8 +88,8 @@ tee <<-EOF
 EOF
 
 # Prevents From Repeating
-cat pg/data/tld.program > pg/data/old.program
-echo "$typed" > pg/data/tld.program
+cat/pg/data/tld.program >/pg/data/old.program
+echo "$typed" >/pg/data/tld.program
 
 sleep 3
 fi
@@ -102,11 +102,11 @@ tee <<-EOF
 EOF
 
 sleep 4
-old=$(cat pg/data/old.program)
-new=$(cat pg/data/tld.program)
+old=$(cat/pg/data/old.program)
+new=$(cat/pg/data/tld.program)
 
-touch pg/data/tld.type
-tldtype=$(cat pg/data/tld.type)
+touch/pg/data/tld.type
+tldtype=$(cat/pg/data/tld.type)
 
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
@@ -123,7 +123,7 @@ fi
 
 if [ -e "/pg/coreapps/apps/$new.yml" ]; then ansible-playbook /pg/coreapps/apps/$new.yml; fi
 if [ -e "/pg/coreapps/communityapps/$new.yml" ]; then ansible-playbook /pg/communityapps/apps/$new.yml; fi
-echo "standard" > pg/data/tld.type
+echo "standard" >/pg/data/tld.type
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
