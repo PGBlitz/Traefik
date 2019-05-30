@@ -329,7 +329,8 @@ tee <<-EOF
 
 EOF
 
-bash /pg/apps/apps/portainer/start.sh
+var798="portainer"
+echo "${var798}" > /pg/var/role.name && bash "/pg/apps/apps/${var798}/start.sh"
 
 delseconds=10
 domain=$(cat /pg/data/server.domain)
