@@ -56,7 +56,7 @@ NOTE 2: When deploying Traefik, you will be required to wait at least $typed
 seconds as a result of the check.
 
 EOF
-  echo "$typed2" >/pg/data/server.delaycheck
+  echo "$typed2" > /pg/data/server.delaycheck
   read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
@@ -107,7 +107,7 @@ NOTE: Traefik must be deployed/redeployed for the domain name changes to
 take affect!
 
 EOF
-  echo $typed >/pg/data/server.domain
+  echo $typed > /pg/data/server.domain
   read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
@@ -129,7 +129,7 @@ pnum=0
 mkdir -p /pg/data/prolist
 rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
-ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
+ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /pg/data/prolist/prolist.sh
 
 while read p; do
   let "pnum++"
@@ -202,7 +202,7 @@ NOTE: Make all changes first.  Traefik must be deployed/redeployed for
 the email name changes to take affect!
 
 EOF
-  echo $typed >/pg/data/server.email
+  echo $typed > /pg/data/server.email
   read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 
 }
@@ -231,7 +231,7 @@ if [[ $(cat /pg/data/traefik.provider) != "NOT-SET" ]]; then
   mkdir -p /pg/data/prolist
   rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
-  ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
+  ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /pg/data/prolist/prolist.sh
 
   # Set Provider for the Process
   provider7=$(cat /pg/data/traefik.provider)
@@ -240,7 +240,7 @@ if [[ $(cat /pg/data/traefik.provider) != "NOT-SET" ]]; then
   while read p; do
     let "pnum++"
     echo "$p" > "/pg/data/prolist/$pnum"
-    echo "[$pnum] $p" >>/pg/data/prolist/final.sh
+    echo "[$pnum] $p" >> /pg/data/prolist/final.sh
 
     # Generates a Not-Set for the Echo Below
     file="/pg/data/traefik/$provider7/$p"
@@ -416,7 +416,7 @@ EOF
   echo -ne "StandBy - Rebuilding Containers in: $delseconds Seconds  "'\r';
   sleep 1; done
 
-  docker ps -a --format "{{.Names}}"  >/pg/data/container.running
+  docker ps -a --format "{{.Names}}"  > /pg/data/container.running
 
   # Containers to Exempt
   sed -i -e "/traefik/d"/pg/data/container.running
@@ -478,12 +478,12 @@ EOF
   mkdir -p /pg/data/prolist
   rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
-  ls -la "/pg/traefik/providers" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
+  ls -la "/pg/traefik/providers" | awk '{print $9}' | tail -n +4 > /pg/data/prolist/prolist.sh
 
   while read p; do
     let "pnum++"
     echo "$p" > "/pg/data/prolist/$pnum"
-    echo "[$pnum] $p" >>/pg/data/prolist/final.sh
+    echo "[$pnum] $p" >> /pg/data/prolist/final.sh
   done <pg/data/prolist/prolist.sh
 
   cat /pg/data/prolist/final.sh
@@ -495,7 +495,7 @@ EOF
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
     echo
   done
-  echo $(cat /pg/data/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) >/pg/data/traefik.provider
+  echo $(cat /pg/data/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) > /pg/data/traefik.provider
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -525,7 +525,7 @@ echo "
 mkdir -p /pg/data/prolist
 rm -rf /pg/data/prolist/* 1>/dev/null 2>&1
 
-ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 >/pg/data/prolist/prolist.sh
+ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /pg/data/prolist/prolist.sh
 
 while read p; do
   echo -n "      ${p}: " >> /pg/traefik/provider.yml
