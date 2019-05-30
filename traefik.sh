@@ -62,11 +62,11 @@ esac
 
 }
 
-main/pg/data/traefik.provider NOT-SET provider
-main/pg/data/server.email NOT-SET email
-main/pg/data/server.delaycheck 60 delaycheck
-main/pg/data/server.domain NOT-SET domain
-main/pg/data/tld.program NOT-SET tld
-main/pg/data/traefik.deploy 'Not Deployed' deploy
+main /pg/data/traefik.provider NOT-SET provider
+main /pg/data/server.email NOT-SET email
+main /pg/data/server.delaycheck 60 delaycheck
+main /pg/data/server.domain NOT-SET domain
+main /pg/data/tld.program NOT-SET tld
+main /pg/data/traefik.deploy 'Not Deployed' deploy
 
 traefikstart
