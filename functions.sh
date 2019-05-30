@@ -254,7 +254,7 @@ if [[ $(cat /pg/data/traefik.provider) != "NOT-SET" ]]; then
 fi
 
 # If message.c exists due to incorrect working traefik, this will show
-if [ -e "/pg/data/plexguide/emergency/message.c" ]; then
+if [ -e "/pg/data/blitz/emergency/message.c" ]; then
   deployed="DEPLOYED - INCORRECTLY"; fi
 
 # Last Piece of the Interface
@@ -356,12 +356,12 @@ delseconds=$[${delseconds}-1]
 echo -ne "StandBy - Portainer Validation Checks: $delseconds Seconds  "'\r';
 sleep 1; done
 
-touch /pg/data/plexguide/traefikportainer.check
-wget -q "https://portainer.${domain}" -O "/pg/data/plexguide/traefikportainer.check"
+touch /pg/data/blitz/traefikportainer.check
+wget -q "https://portainer.${domain}" -O "/pg/data/blitz/traefikportainer.check"
 
 # If Portainer Detection Failed
-if [[ $(cat /pg/data/plexguide/traefikportainer.check) == "" ]]; then
-  rm -rf /pg/data/plexguide/traefikportainer.check
+if [[ $(cat /pg/data/blitz/traefikportainer.check) == "" ]]; then
+  rm -rf /pg/data/blitz/traefikportainer.check
 
 tee <<-EOF
 
