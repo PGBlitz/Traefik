@@ -136,7 +136,7 @@ while read p; do
   echo -n "${p} - "
   echo -n $(cat "/pg/data/traefik/$provider/$p")
   echo
-done <pg/data/prolist/prolist.sh
+done </pg/data/prolist/prolist.sh
   echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 echo
@@ -250,7 +250,7 @@ if [[ $(cat /pg/data/traefik.provider) != "NOT-SET" ]]; then
       else filler=""; fi
 
     echo "[$pnum] ${filler}${p}"
-  done <pg/data/prolist/prolist.sh
+  done </pg/data/prolist/prolist.sh
 fi
 
 # If message.c exists due to incorrect working traefik, this will show
@@ -484,7 +484,7 @@ EOF
     let "pnum++"
     echo "$p" > "/pg/data/prolist/$pnum"
     echo "[$pnum] $p" >> /pg/data/prolist/final.sh
-  done <pg/data/prolist/prolist.sh
+  done </pg/data/prolist/prolist.sh
 
   cat /pg/data/prolist/final.sh
   echo
@@ -530,7 +530,7 @@ ls -la "/pg/traefik/providers/$provider" | awk '{print $9}' | tail -n +4 > /pg/d
 while read p; do
   echo -n "      ${p}: " >> /pg/traefik/provider.yml
   echo $(cat "/pg/data/traefik/$provider/$p") >> /pg/traefik/provider.yml
-done <pg/data/prolist/prolist.sh
+done </pg/data/prolist/prolist.sh
 
 if [[ $(docker ps --format '{{.Names}}' | grep traefik) == "traefik" ]]; then
   docker stop traefik 1>/dev/null 2>&1
