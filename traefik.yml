@@ -9,25 +9,24 @@
 - hosts: localhost
   gather_facts: True
   tasks:
-
     # BASIC TASKS ######################################################
     - name: 'Including cron job'
       include_tasks: '/opt/traefik/provider.yml'
 
     - name: Register E-Mail
-      shell: "cat /var/plexguide/server.email"
+      shell: 'cat /var/plexguide/server.email'
       register: email
 
     - name: Register Delay Check
-      shell: "cat /var/plexguide/server.delaycheck"
+      shell: 'cat /var/plexguide/server.delaycheck'
       register: delaycheck
 
     - name: Register Domain
-      shell: "cat /var/plexguide/server.domain"
+      shell: 'cat /var/plexguide/server.domain'
       register: domain
 
     - name: Register Provider
-      shell: "cat /var/plexguide/traefik.provider"
+      shell: 'cat /var/plexguide/traefik.provider'
       register: provider
 
     - name: Remove Traefik
@@ -41,7 +40,7 @@
         path: /opt/appdata/traefik/traefik.toml
 
     - name: Create Basic Directories
-      file: "path={{item}} state=directory mode=0775 owner=1000 group=1000"
+      file: 'path={{item}} state=directory mode=0775 owner=1000 group=1000'
       with_items:
         - /opt/appdata/traefik
         - /opt/appdata/traefik/acme
@@ -56,7 +55,7 @@
 
     - name: Check acme.json exists
       stat:
-        path: "/opt/appdata/traefik/acme/acme.json"
+        path: '/opt/appdata/traefik/acme/acme.json'
       register: acme_json
 
     - name: Installing ACME
@@ -75,8 +74,8 @@
         image: traefik:1.7
         pull: yes
         published_ports:
-          - "443:443"
-          - "80:80"
+          - '443:443'
+          - '80:80'
         env: '{{pg_env}}'
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock:ro

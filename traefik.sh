@@ -9,56 +9,68 @@ source /opt/traefik/functions.sh
 
 traefikstart() {
 
-traefikpaths #functions
-traefikstatus #functions
-layoutbuilder # functions - builds out menu
+  traefikpaths  #functions
+  traefikstatus #functions
+  layoutbuilder # functions - builds out menu
 
-case $typed in
-    1 )
-      bash /opt/traefik/tld.sh
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    2 )
-      providerinterface
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    3 )
-      domaininterface
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    4 )
-      emailinterface
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    5 )
-      delaycheckinterface
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    a )
-      blockdeploycheck
-      deploytraefik
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    A )
-      blockdeploycheck
-      deploytraefik
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    B )
-      destroytraefik
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    b )
-      destroytraefik
-      bash /opt/traefik/traefik.sh
-      exit ;;
-    z )
-      exit ;;
-    Z )
-      exit ;;
-    * )
-      traefikstart ;;
-esac
+  case $typed in
+  1)
+    bash /opt/traefik/tld.sh
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  2)
+    providerinterface
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  3)
+    domaininterface
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  4)
+    emailinterface
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  5)
+    delaycheckinterface
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  a)
+    blockdeploycheck
+    deploytraefik
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  A)
+    blockdeploycheck
+    deploytraefik
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  B)
+    destroytraefik
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  b)
+    destroytraefik
+    bash /opt/traefik/traefik.sh
+    exit
+    ;;
+  z)
+    exit
+    ;;
+  Z)
+    exit
+    ;;
+  *)
+    traefikstart
+    ;;
+  esac
 
 }
 

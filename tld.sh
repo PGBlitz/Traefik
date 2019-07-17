@@ -7,7 +7,7 @@
 ################################################################################
 
 # To Get List for Rebuilding or TLD
-docker ps --format '{{.Names}}' > /tmp/backup.list
+docker ps --format '{{.Names}}' >/tmp/backup.list
 sed -i -e "/traefik/d" /tmp/backup.list
 sed -i -e "/watchtower/d" /tmp/backup.list
 sed -i -e "/wp-*/d" /tmp/backup.list
@@ -20,20 +20,20 @@ sed -i -e "/pgui/d" /tmp/backup.list
 rm -rf /tmp/backup.build 1>/dev/null 2>&1
 #### Commenting Out To Let User See
 while read p; do
-  echo -n "$p" >> /tmp/backup.build
-  echo -n " " >> /tmp/backup.build
+  echo -n "$p" >>/tmp/backup.build
+  echo -n " " >>/tmp/backup.build
 done </tmp/backup.list
 running=$(cat /tmp/backup.list)
 
 # If Blank, Exit
 if [ "$running" == "" ]; then
-tee <<-EOF
+  tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔️ WARNING! - No Apps are Running! Exiting!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-sleep 2
-exit
+  sleep 2
+  exit
 fi
 
 # Menu Interface
@@ -52,46 +52,46 @@ tee <<-EOF
 EOF
 
 # Standby
-read -p 'Type an Application Name | Press [ENTER]: ' typed < /dev/tty
+read -p 'Type an Application Name | Press [ENTER]: ' typed </dev/tty
 
 if [ "$typed" == "exit" ]; then exit; fi
 
 tcheck=$(echo $running | grep "\<$typed\>")
 if [ "$tcheck" == "" ]; then
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔️ WARNING! - Type an Application Name! Case Senstive! Restarting!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-sleep 3
-bash /opt/traefik/tld.sh
-exit
+  sleep 3
+  bash /opt/traefik/tld.sh
+  exit
 fi
 
 if [ "$typed" == "" ]; then
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⛔️ WARNING! - The TLD Application Name Cannot Be Blank!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-sleep 3
-bash /opt/traefik/tld.sh
-exit
+  sleep 3
+  bash /opt/traefik/tld.sh
+  exit
 else
-tee <<-EOF
+  tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅️  PASS: TLD Application Set
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-# Prevents From Repeating
-cat /var/plexguide/tld.program > /var/plexguide/old.program
-echo "$typed" > /var/plexguide/tld.program
+  # Prevents From Repeating
+  cat /var/plexguide/tld.program >/var/plexguide/old.program
+  echo "$typed" >/var/plexguide/tld.program
 
-sleep 3
+  sleep 3
 fi
 
 tee <<-EOF
@@ -114,16 +114,16 @@ if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
     if [ -e "/opt/coreapps/apps/$old.yml" ]; then ansible-playbook /opt/coreapps/apps/$old.yml; fi
     if [ -e "/opt/coreapps/communityapps/$old.yml" ]; then ansible-playbook /opt/communityapps/apps/$old.yml; fi
   elif [[ "$tldtype" == "wordpress" ]]; then
-    echo "$old" > /tmp/wp_id
+    echo "$old" >/tmp/wp_id
     ansible-playbook /opt/pgpress/wordpress.yml
-    echo "$typed" > /tmp/wp_id
+    echo "$typed" >/tmp/wp_id
   fi
 
 fi
 
 if [ -e "/opt/coreapps/apps/$new.yml" ]; then ansible-playbook /opt/coreapps/apps/$new.yml; fi
 if [ -e "/opt/coreapps/communityapps/$new.yml" ]; then ansible-playbook /opt/communityapps/apps/$new.yml; fi
-echo "standard" > /var/plexguide/tld.type
+echo "standard" >/var/plexguide/tld.type
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
+read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name </dev/tty
