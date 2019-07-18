@@ -42,7 +42,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🚀 Traefik - Provider Interface
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NOTE: App Must Be Actively Running! To quit, type >>> exit
+NOTE: App Must Be Actively Running!
 
 EOF
 echo PROGRAMS:
@@ -52,9 +52,9 @@ tee <<-EOF
 EOF
 
 # Standby
-read -p 'Type an Application Name | Press [ENTER]: ' typed </dev/tty
+read -p 'Type an Application Name | Press [ENTER] | To quit, type >>> z or exit: ' typed </dev/tty
 
-if [ "$typed" == "exit" ] || [ "$typed" == "q" ] || [ "$typed" == "Q" ]; then exit; fi
+if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then exit; fi
 
 tcheck=$(echo $running | grep "\<$typed\>")
 if [ "$tcheck" == "" ]; then

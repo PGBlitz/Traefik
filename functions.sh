@@ -38,9 +38,9 @@ EOF
 
   typed2=999999999
   while [[ "$typed2" -lt "30" || "$typed2" -gt "120" ]]; do
-    echo "Quitting? Type >>> q or exit"
+    echo "To quit, type >>> z or exit"
     read -p 'Type Number Between 30 through 120 | Press [ENTER]: ' typed2 </dev/tty
-    if [[ "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" ]]; then traefikstart; fi
+    if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then traefikstart; fi
     echo
   done
 
@@ -82,10 +82,10 @@ domaininterface() {
 🚀 Domain Name - Current Domain: $domain
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Quitting? Type >>> q or exit
+To quit, type >>> z or exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then traefikstart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then traefikstart; fi
   if [[ $(echo ${typed} | grep "\.") == "" ]]; then
 
     tee <<-EOF
@@ -164,10 +164,10 @@ emailinterface() {
 🚀 Current EMail Address: $email
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Quitting? Type >>> q or exit
+To quit, type >>> z or exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then traefikstart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then traefikstart; fi
 
   ### fix bug if user doesn't type .
   if [[ $(echo $typed | grep "\.") == "" ]]; then
@@ -292,10 +292,10 @@ layoutprompt() {
 🚀 Input Value - $process5
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Quitting? Type >>> q or exit
+To quit, type >>> z or exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then traefikstart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then traefikstart; fi
 
   echo "$typed" >"/var/plexguide/traefik/$provider7/$process5"
   echo
@@ -501,9 +501,9 @@ EOF
   echo
   typed2=999999999
   while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
-    echo "Quitting? Type >>> q or exit"
+    echo "To quit, type >>> z or exit"
     read -p 'Type Number | Press [ENTER]: ' typed2 </dev/tty
-    if [[ "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" ]]; then traefikstart; fi
+    if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then traefikstart; fi
     echo
   done
   echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) >/var/plexguide/traefik.provider
