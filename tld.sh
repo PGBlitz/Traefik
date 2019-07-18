@@ -54,7 +54,7 @@ EOF
 # Standby
 read -p 'Type an Application Name | Press [ENTER]: ' typed </dev/tty
 
-if [ "$typed" == "exit" ]; then exit; fi
+if [ "$typed" == "exit" ] || [ "$typed" == "q" ] || [ "$typed" == "Q" ]; then exit; fi
 
 tcheck=$(echo $running | grep "\<$typed\>")
 if [ "$tcheck" == "" ]; then
@@ -112,7 +112,7 @@ if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
   if [[ "$tldtype" == "standard" ]]; then
     if [ -e "/opt/coreapps/apps/$old.yml" ]; then ansible-playbook /opt/coreapps/apps/$old.yml; fi
-    if [ -e "/opt/coreapps/communityapps/$old.yml" ]; then ansible-playbook /opt/communityapps/apps/$old.yml; fi
+    if [ -e "/opt/communityapps/$old.yml" ]; then ansible-playbook /opt/communityapps/apps/$old.yml; fi
   elif [[ "$tldtype" == "wordpress" ]]; then
     echo "$old" >/tmp/wp_id
     ansible-playbook /opt/pgpress/wordpress.yml
@@ -122,7 +122,7 @@ if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 fi
 
 if [ -e "/opt/coreapps/apps/$new.yml" ]; then ansible-playbook /opt/coreapps/apps/$new.yml; fi
-if [ -e "/opt/coreapps/communityapps/$new.yml" ]; then ansible-playbook /opt/communityapps/apps/$new.yml; fi
+if [ -e "/opt/communityapps/$new.yml" ]; then ansible-playbook /opt/communityapps/apps/$new.yml; fi
 echo "standard" >/var/plexguide/tld.type
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

@@ -38,9 +38,9 @@ EOF
 
   typed2=999999999
   while [[ "$typed2" -lt "30" || "$typed2" -gt "120" ]]; do
-    echo "QUITTING? Type >>> exit"
+    echo "Quitting? Type >>> q or exit"
     read -p 'Type Number Between 30 through 120 | Press [ENTER]: ' typed2 </dev/tty
-    if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
+    if [[ "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" ]]; then traefikstart; fi
     echo
   done
 
@@ -82,10 +82,10 @@ domaininterface() {
 🚀 Domain Name - Current Domain: $domain
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-QUITTING? Type >>> exit
+Quitting? Type >>> q or exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then traefikstart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then traefikstart; fi
   if [[ $(echo ${typed} | grep "\.") == "" ]]; then
 
     tee <<-EOF
@@ -164,10 +164,10 @@ emailinterface() {
 🚀 Current EMail Address: $email
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-QUITTING? Type >>> exit
+Quitting? Type >>> q or exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then traefikstart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then traefikstart; fi
 
   ### fix bug if user doesn't type .
   if [[ $(echo $typed | grep "\.") == "" ]]; then
@@ -292,10 +292,10 @@ layoutprompt() {
 🚀 Input Value - $process5
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-QUITTING? Type >>> exit
+Quitting? Type >>> q or exit
 EOF
   read -p 'Input Value | Press [ENTER]: ' typed </dev/tty
-  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" ]]; then traefikstart; fi
+  if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "q" || "$typed" == "Q" ]]; then traefikstart; fi
 
   echo "$typed" >"/var/plexguide/traefik/$provider7/$process5"
   echo
@@ -464,7 +464,7 @@ EOF
 
     #Rebuild Depending on Location
     if [ -e "/opt/coreapps/apps/$app.yml" ]; then ansible-playbook /opt/coreapps/apps/$app.yml; fi
-    if [ -e "/opt/coreapps/communityapps/$app.yml" ]; then ansible-playbook /opt/communityapps/apps/$app.yml; fi
+    if [ -e "/opt/communityapps/$app.yml" ]; then ansible-playbook /opt/communityapps/apps/$app.yml; fi
 
   done
 
@@ -501,9 +501,9 @@ EOF
   echo
   typed2=999999999
   while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
-    echo "QUITTING? Type >>> exit"
+    echo "Quitting? Type >>> q or exit"
     read -p 'Type Number | Press [ENTER]: ' typed2 </dev/tty
-    if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" ]]; then traefikstart; fi
+    if [[ "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" || "$typed2" == "exit" || "$typed2" == "q" || "$typed2" == "Q" ]]; then traefikstart; fi
     echo
   done
   echo $(cat /var/plexguide/prolist/final.sh | grep "$typed2" | cut -c 5- | awk '{print $1}' | head -n 1) >/var/plexguide/traefik.provider
