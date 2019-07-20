@@ -504,7 +504,7 @@ EOF
   echo
   typed2=999999999
   while [[ "$typed2" -lt "1" || "$typed2" -gt "$pnum" ]]; do
-    echo "To quit, type >>> z or exit"
+    echo "[Z] Exit"
     read -p 'Type Number | Press [ENTER]: ' typed2 </dev/tty
     if [[ "$typed2" == "exit" || "$typed2" == "Exit" || "$typed2" == "EXIT" || "$typed2" == "z" || "$typed2" == "Z" ]]; then traefikstart; fi
     echo

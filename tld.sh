@@ -48,11 +48,13 @@ EOF
 echo PROGRAMS:
 echo $running
 tee <<-EOF
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 EOF
 
 # Standby
-read -p 'Type an Application Name | Press [ENTER] | To quit, type >>> z or exit: ' typed </dev/tty
+read -p 'Type an Application Name | Press [ENTER] | [Z] Exit: ' typed </dev/tty
 
 if [[ "$typed" == "exit" || "$typed" == "Exit" || "$typed" == "EXIT" || "$typed" == "z" || "$typed" == "Z" ]]; then exit; fi
 
