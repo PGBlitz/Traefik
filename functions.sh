@@ -348,6 +348,11 @@ EOF
   delseconds=10
   domain=$(cat /var/plexguide/server.domain)
 
+  cname="portainer"
+  if [[ -f "/var/plexguide/portainer.cname" ]]; then
+    cname=$(cat "/var/plexguide/portainer.cname")
+  fi
+
   tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -356,7 +361,7 @@ EOF
 
 NOTE 1: Do NOT EXIT this interface. Please standby for validation checks!
 
-NOTE 2: Checking on https://portainer.${domain}'s existance.
+NOTE 2: Checking on https://${cname}.${domain}'s existance.
 Please allow 10 seconds for portainer to boot up.
 
 NOTE 3: Be aware that simple mistakes such as bad input, bad domain, or
@@ -371,8 +376,13 @@ EOF
     sleep 1
   done
 
+  cname="portainer"
+  if [[ -f "/var/plexguide/portainer.cname" ]]; then
+    cname=$(cat "/var/plexguide/portainer.cname")
+  fi
+
   touch /opt/appdata/plexguide/traefikportainer.check
-  wget -q "https://portainer.${domain}" -O "/opt/appdata/plexguide/traefikportainer.check"
+  wget -q "https://${cname}.${domain}" -O "/opt/appdata/plexguide/traefikportainer.check"
 
   # If Portainer Detection Failed
   if [[ $(cat /opt/appdata/plexguide/traefikportainer.check) == "" ]]; then
@@ -421,7 +431,7 @@ EOF
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚀 Portainer - https://portainer.${domain} detected!
+🚀 Portainer - https://${cname}.${domain} detected!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
