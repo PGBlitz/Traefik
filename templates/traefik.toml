@@ -13,17 +13,17 @@ logLevel = "WARN"
 defaultEntryPoints = ["http", "https"]
 
 [entryPoints]
-  [entryPoints.http]
-  address = ":80"
-  [entryPoints.http.redirect]
-    entryPoint = "https"
-  [entryPoints.https]
-  address = ":443"
-    [entryPoints.https.tls]
-    MinVersion = "VersionTLS12"
-    CipherSuites = ["TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256","TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384","TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384","TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256"]
-  [entryPoints.monitor]
-  address = ":8081"
+[entryPoints.http]
+address = ":80"
+[entryPoints.http.redirect]
+entryPoint = "https"
+[entryPoints.https]
+address = ":443"
+[entryPoints.https.tls]
+MinVersion = "VersionTLS12"
+CipherSuites = ["TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256","TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384","TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384","TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256","TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256"]
+[entryPoints.monitor]
+address = ":8081"
 
 [retry]
 
@@ -32,18 +32,28 @@ acmeLogging = true
 email = "{{email.stdout}}"
 storage = "/etc/traefik/acme/acme.json"
 entryPoint = "https"
-  [acme.dnsChallenge]
-    provider = "{{provider.stdout}}"
-    delayBeforeCheck = "{{delaycheck.stdout}}"
+[acme.dnsChallenge]
+provider = "{{provider.stdout}}"
+delayBeforeCheck = "{{delaycheck.stdout}}"
 
 [[acme.domains]]
-  main = "{{domain.stdout}}"
+main = "{{domain.stdout}}"
 [[acme.domains]]
-  main = "*.{{domain.stdout}}"
+main = "*.{{domain.stdout}}"
 
-#[[acme.domains]]
-#  main = "{{domain.stdout}}"
-#  sans = ["{{domain.stdout}}"]
+[backends]
+## Cockpit Backend
+[backends.cockpit]
+[backends.cockpit.servers.server]
+url = "https://127.0.0.1:9090"
+
+[frontends]
+## Cockpit Frontend
+[frontends.cockpit]
+backend = "cockpit"
+passHostHeader = true
+[frontends.cockpit.routes.cockpit]
+rule = "Host:cockpit.{{domain.stdout}}"
 
 [docker]
 endpoint = "unix:///var/run/docker.sock"
