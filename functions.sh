@@ -478,7 +478,6 @@ EOF
   sleep 3
   for ((i = 1; i < $count + 1; i++)); do
     app=$(sed "${i}q;d" /var/plexguide/container.running)
-
     tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -486,9 +485,8 @@ EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-    sleep 3
-
     echo "$app" >/tmp/program_var
+    sleep 1.5
 
     #Rebuild Depending on Location
     if [ -e "/opt/coreapps/apps/$app.yml" ]; then ansible-playbook /opt/coreapps/apps/$app.yml; fi
