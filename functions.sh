@@ -330,7 +330,7 @@ tee <<-EOF
 EOF
 
 var798="portainer"
-echo "${var798}" > /pg/var/role.name && bash "/pg/apps/apps/${var798}/start.sh"
+echo "${var798}" > /pg/var/role.name && bash "/pg/apps/programs/${var798}/start.sh"
 
 delseconds=10
 domain=$(cat /pg/data/server.domain)
