@@ -537,8 +537,8 @@ if [[ $(docker ps --format '{{.Names}}' | grep traefik) == "traefik" ]]; then
   docker stop traefik 1>/dev/null 2>&1
   docker rm traefik 1>/dev/null 2>&1; fi
 
-file="/pg/data/traefik"
-if [ -e "$file" ]; then rm -rf /pg/data/traefik; fi
+#file="/pg/data/traefik"
+#if [ -e "$file" ]; then rm -rf /pg/data/traefik; fi
 
 ansible-playbook /pg/traefik/traefik.yml
 
