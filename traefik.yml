@@ -15,19 +15,19 @@
       include_tasks: '/pg/traefik/provider.yml'
 
     - name: Register E-Mail
-      shell: "cat /pg/data/server.email"
+      shell: "cat /pg/var/server.email"
       register: email
 
     - name: Register Delay Check
-      shell: "cat /pg/data/server.delaycheck"
+      shell: "cat /pg/var/server.delaycheck"
       register: delaycheck
 
     - name: Register Domain
-      shell: "cat /pg/data/server.domain"
+      shell: "cat /pg/var/server.domain"
       register: domain
 
     - name: Register Provider
-      shell: "cat /pg/data/traefik.provider"
+      shell: "cat /pg/var/traefik.provider"
       register: provider
 
     - name: Remove Traefik
