@@ -88,8 +88,8 @@ tee <<-EOF
 EOF
 
 # Prevents From Repeating
-cat /var/plexguide/tld.program > /var/plexguide/old.program
-echo "$typed" > /var/plexguide/tld.program
+cat /pg/var/tld.program > /pg/var/old.program
+echo "$typed" > /pg/var/tld.program
 
 sleep 3
 fi
@@ -102,28 +102,26 @@ tee <<-EOF
 EOF
 
 sleep 4
-old=$(cat /var/plexguide/old.program)
-new=$(cat /var/plexguide/tld.program)
+old=$(cat /pg/var/old.program)
+new=$(cat /pg/var/tld.program)
 
-touch /var/plexguide/tld.type
-tldtype=$(cat /var/plexguide/tld.type)
+touch /pg/var/tld.type
+tldtype=$(cat /pg/var/tld.type)
 
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
   if [[ "$tldtype" == "standard" ]]; then
-    if [ -e "/opt/coreapps/apps/$old.yml" ]; then ansible-playbook /opt/coreapps/apps/$old.yml; fi
-    if [ -e "/opt/coreapps/communityapps/$old.yml" ]; then ansible-playbook /opt/communityapps/apps/$old.yml; fi
+    if [ -e "bash /pg/apps/programs/$old/start.sh" ]; then bash /pg/apps/programs/$old/start.sh; fi
   elif [[ "$tldtype" == "wordpress" ]]; then
     echo "$old" > /pg/tmp/wp_id
-    ansible-playbook /opt/pgpress/wordpress.yml
+    ansible-playbook /pg/pgpress/wordpress.yml
     echo "$typed" > /pg/tmp/wp_id
   fi
 
 fi
 
-if [ -e "/opt/coreapps/apps/$new.yml" ]; then ansible-playbook /opt/coreapps/apps/$new.yml; fi
-if [ -e "/opt/coreapps/communityapps/$new.yml" ]; then ansible-playbook /opt/communityapps/apps/$new.yml; fi
-echo "standard" > /var/plexguide/tld.type
+if [ -e "bash /pg/apps/programs/$new/start.sh" ]; then bash /pg/apps/programs/$new/start.sh; fi
+echo "standard" > /pg/var/tld.type
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty

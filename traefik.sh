@@ -62,11 +62,11 @@ esac
 
 }
 
-main /var/plexguide/traefik.provider NOT-SET provider
-main /var/plexguide/server.email NOT-SET email
-main /var/plexguide/server.delaycheck 60 delaycheck
-main /var/plexguide/server.domain NOT-SET domain
-main /var/plexguide/tld.program NOT-SET tld
-main /var/plexguide/traefik.deploy 'Not Deployed' deploy
+main /pg/var/traefik.provider NOT-SET provider
+main /pg/var/server.email NOT-SET email
+main /pg/var/server.delaycheck 60 delaycheck
+main /pg/var/server.domain NOT-SET domain
+main /pg/var/tld.program NOT-SET tld
+main /pg/var/traefik.deploy 'Not Deployed' deploy
 
 traefikstart
