@@ -452,7 +452,7 @@ EOF
 	sleep 3
 
   #Rebuild Depending on Location
-  if [ -e "/pg/apps/programs/$portainer/start.sh" ]; then bash /pg/apps/programs/$portainer/start.sh; fi
+  if [ -e "/pg/apps/programs/$app/start.sh" ]; then bash "/pg/apps/programs/$app/start.sh"; fi
 
 done
 
@@ -538,7 +538,7 @@ if [[ $(docker ps --format '{{.Names}}' | grep traefik) == "traefik" ]]; then
 file="/pg/data/traefik"
 if [ -e "$file" ]; then rm -rf /pg/data/traefik; fi
 
-ansible-playbook /opt/traefik/traefik.yml
+ansible-playbook /pg/traefik/traefik.yml
 
 postdeploy
 }
