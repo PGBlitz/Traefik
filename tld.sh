@@ -52,6 +52,7 @@ tee <<-EOF
 EOF
 
 # Standby
+echo ""
 read -p 'Type an Application Name | Press [ENTER]: ' typed < /dev/tty
 
 if [ "$typed" == "exit" ]; then exit; fi
@@ -111,18 +112,16 @@ tldtype=$(cat /pg/var/tld.type)
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
   if [[ "$tldtype" == "standard" ]]; then
-    if [ -e "/pg/coreapps/apps/$old.yml" ]; then ansible-playbook /pg/coreapps/apps/$old.yml; fi
-    if [ -e "/pg/coreapps/communityapps/$old.yml" ]; then ansible-playbook /pg/communityapps/apps/$old.yml; fi
+    if [ -e "/pg/coreapps/apps/$old.yml" ]; then ansible-playbook /pg/apps/programs/$old.yml; fi
   elif [[ "$tldtype" == "wordpress" ]]; then
-    echo "$old" > /pg/data/wp_id
+    echo "$old" > /pg/var/wp_id
     ansible-playbook /pg/pgpress/wordpress.yml
-    echo "$typed" > /pg/data/wp_id
+    echo "$typed" > /pg/var/wp_id
   fi
 
 fi
 
-if [ -e "/pg/coreapps/apps/$new.yml" ]; then ansible-playbook /pg/coreapps/apps/$new.yml; fi
-if [ -e "/pg/coreapps/communityapps/$new.yml" ]; then ansible-playbook /pg/communityapps/apps/$new.yml; fi
+if [ -e "/pg/coreapps/apps/$new.yml" ]; then ansible-playbook /pg/apps/programs/$new.yml; fi
 echo "standard" > /pg/var/tld.type
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
