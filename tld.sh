@@ -7,23 +7,23 @@
 ################################################################################
 
 # To Get List for Rebuilding or TLD
-docker ps --format '{{.Names}}' > /pg/data/backup.list
-sed -i -e "/traefik/d" /pg/data/backup.list
-sed -i -e "/watchtower/d" /pg/data/backup.list
-sed -i -e "/wp-*/d" /pg/data/backup.list
-sed -i -e "/x2go*/d" /pg/data/backup.list
-sed -i -e "/plexguide/d" /pg/data/backup.list
-sed -i -e "/cloudplow/d" /pg/data/backup.list
-sed -i -e "/oauth/d" /pg/data/backup.list
-sed -i -e "/pgui/d" /pg/data/backup.list
+docker ps --format '{{.Names}}' > /pg/var/backup.list
+sed -i -e "/traefik/d" /pg/var/backup.list
+sed -i -e "/watchtower/d" /pg/var/backup.list
+sed -i -e "/wp-*/d" /pg/var/backup.list
+sed -i -e "/x2go*/d" /pg/var/backup.list
+sed -i -e "/plexguide/d" /pg/var/backup.list
+sed -i -e "/cloudplow/d" /pg/var/backup.list
+sed -i -e "/oauth/d" /pg/var/backup.list
+sed -i -e "/pgui/d" /pg/var/backup.list
 
-rm -rf /pg/data/backup.build 1>/dev/null 2>&1
+rm -rf /pg/var/backup.build 1>/dev/null 2>&1
 #### Commenting Out To Let User See
 while read p; do
-  echo -n "$p" >> /pg/data/backup.build
-  echo -n " " >> /pg/data/backup.build
-done </pg/data/backup.list
-running=$(cat /pg/data/backup.list)
+  echo -n "$p" >> /pg/var/backup.build
+  echo -n " " >> /pg/var/backup.build
+done </pg/var/backup.list
+running=$(cat /pg/var/backup.list)
 
 # If Blank, Exit
 if [ "$running" == "" ]; then
@@ -88,8 +88,8 @@ tee <<-EOF
 EOF
 
 # Prevents From Repeating
-cat /pg/data/tld.program > /pg/data/old.program
-echo "$typed" > /pg/data/tld.program
+cat /pg/var/tld.program > /pg/data/old.program
+echo "$typed" > /pg/var/tld.program
 
 sleep 3
 fi
@@ -103,10 +103,10 @@ EOF
 
 sleep 4
 old=$(cat /pg/data/old.program)
-new=$(cat /pg/data/tld.program)
+new=$(cat /pg/var/tld.program)
 
-touch /pg/data/tld.type
-tldtype=$(cat /pg/data/tld.type)
+touch /pg/var/tld.type
+tldtype=$(cat /pg/var/tld.type)
 
 if [[ "$old" != "$new" && "$old" != "NOT-SET" ]]; then
 
@@ -123,7 +123,7 @@ fi
 
 if [ -e "/pg/coreapps/apps/$new.yml" ]; then ansible-playbook /pg/coreapps/apps/$new.yml; fi
 if [ -e "/pg/coreapps/communityapps/$new.yml" ]; then ansible-playbook /pg/communityapps/apps/$new.yml; fi
-echo "standard" > /pg/data/tld.type
+echo "standard" > /pg/var/tld.type
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read -p '✅️ Process Complete! Acknowledge Info | Press [ENTER] ' name < /dev/tty
