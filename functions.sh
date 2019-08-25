@@ -329,7 +329,7 @@ tee <<-EOF
 
 EOF
 
-ansible-playbook /opt/coreapps/apps/portainer.yml
+bash /pg/apps/programs/portainer/start.sh
 
 delseconds=10
 domain=$(cat /pg/var/server.domain)
